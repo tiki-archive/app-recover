@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recover/recover.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,10 +25,16 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Plugin example app'),
         ),
-        body: Center(
-          child: Text('Running'),
-        ),
+        body: Center(child: openModal()),
       ),
     );
+  }
+}
+
+class openModal extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+        onPressed: () => Recover().show(context), child: Text('Open Modal'));
   }
 }
