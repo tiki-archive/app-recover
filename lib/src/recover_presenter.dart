@@ -5,16 +5,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:recover/src/recover_style.dart';
 
-import 'model/recover_model_config.dart';
 import 'recover_service.dart';
 import 'ui/recover_ui_layout.dart';
 
 class RecoverPresenter {
-  final RecoverService service;
-  final RecoverModelConfig config;
+  final RecoverService _service;
+  final RecoverStyle _style;
 
-  RecoverPresenter(this.service, this.config);
+  RecoverPresenter(this._service, this._style);
 
   Future<void> render(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -22,11 +22,11 @@ class RecoverPresenter {
         context: context,
         isScrollControlled: true,
         isDismissible: true,
-        backgroundColor: config.backgroundColor,
+        backgroundColor: _style.backgroundColor,
         shape: RoundedRectangleBorder(
-            borderRadius:
-                BorderRadius.vertical(top: Radius.circular(size.width * 0.06))),
+            borderRadius: BorderRadius.vertical(
+                top: Radius.circular(size.width * (_style.modalRadius) / 100))),
         builder: (BuildContext context) => ChangeNotifierProvider.value(
-            value: service, child: RecoverUiLayout()));
+            value: _service, child: RecoverUiLayout(_style)));
   }
 }

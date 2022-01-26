@@ -35,6 +35,10 @@ class openModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-        onPressed: () => Recover().show(context), child: Text('Open Modal'));
+        onPressed: () => Recover(
+                style: RecoverStyle(
+                    fontFamily: 'NunitoSans', textColor: Color(0xFF00133F)))
+            .show(context),
+        child: Text('Open Modal'));
   }
 }
