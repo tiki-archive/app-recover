@@ -12,6 +12,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  lottie: ^1.2.1
   logging: ^1.0.2
   provider: ^6.0.2
 
@@ -70,4 +71,4 @@ fonts:
         weight: 500
   - family: SegoeUI
     fonts:
-      - asset: res/fonts/Segoe-UI.ttf
+      - asset: res/fonts/Segoe-UI.ttfls

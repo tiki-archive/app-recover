@@ -13,6 +13,7 @@ class Recover {
 
   Recover({Color? backgroundColor, double? topRadius})
       : _service = RecoverService(
+            "tiki@mytiki.com",
             RecoverModelConfig(backgroundColor: backgroundColor));
 
   Future<void> show(BuildContext context) => _service.presenter.render(context);

@@ -20,11 +20,11 @@ class RecoverUiBtnElevated extends StatelessWidget{
           color: Colors.white,
         )),
       style: ElevatedButton.styleFrom(
-        fixedSize: Size(MediaQuery.of(context).size.width * 0.7, double.infinity),
+        fixedSize: Size(MediaQuery.of(context).size.width, double.infinity),
         primary: ConfigColor.orange,
-        padding: EdgeInsets.symmetric(vertical: 30),
+        padding: EdgeInsets.symmetric(vertical: 20),
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(20))),
+            borderRadius: BorderRadius.all(Radius.circular(15))),
       ),
     );
   }

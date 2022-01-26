@@ -15,13 +15,8 @@ class RecoverUiLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     RecoverService service = Provider.of<RecoverService>(context);
     return Container(
-        child: Column(mainAxisSize: MainAxisSize.min, children: [
-      //KeysModalViewHeader(),
-      Container(
-        padding: EdgeInsets.only(left: 6, right: 6, bottom: 5),
-        child: _page(service.state.page),
-      )
-    ]));
+        child: _page(service.state.page)
+    );
   }
 
   Widget _page(RecoverModelPage page) {
