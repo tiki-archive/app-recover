@@ -6,9 +6,9 @@
 import 'recover_service.dart';
 
 class RecoverController {
-  final RecoverService service;
+  final RecoverService _service;
 
-  RecoverController(this.service);
+  RecoverController(this._service);
 
   void goToCreateNewAccount() {}
 
