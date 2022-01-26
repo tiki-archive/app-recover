@@ -26,5 +26,7 @@ class RecoverService extends ChangeNotifier {
 
   void notify() {
     notifyListeners();
+    model = RecoverModel();
+    model.email = email;
   }
 }
