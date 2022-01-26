@@ -6,5 +6,5 @@
 import 'recover_model_page.dart';
 
 class RecoverModelState {
-  RecoverModelPage page = RecoverModelPage.newAccount;
+  RecoverModelPage page = RecoverModelPage.creatingKeys;
 }

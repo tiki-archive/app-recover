@@ -12,11 +12,11 @@ import 'recover_ui_btn_elevated.dart';
 import 'recover_ui_btn_text.dart';
 import 'recover_ui_title.dart';
 
-class RecoverUiViewNewAccount extends StatelessWidget {
+class RecoverUiViewDeviceQuestion extends StatelessWidget {
 
-  static const String _title = 'We can’t find an account on this device for ';
-  static const String _opt1Txt = 'Create new account';
-  static const String _opt2Txt = 'Use an existing account';
+  static const String _title = 'Are you logged into another device in your possession?';
+  static const String _opt1Txt = 'Yes';
+  static const String _opt2Txt = 'No';
 
   late final String _email;
   late final RecoverService _service;
@@ -36,11 +36,11 @@ class RecoverUiViewNewAccount extends StatelessWidget {
           Padding(padding: EdgeInsets.only(bottom:40)),
           RecoverUiBtnElevated(
               text: _opt1Txt,
-              callback: () => _service.controller.goToCreateNewAccount()),
+              callback: () => _service.controller.goToOpenQrCode()),
           Padding(padding: EdgeInsets.only(bottom:30)),
           RecoverUiBtnText(
               text: _opt2Txt,
-              callback: () => _service.controller.goToUseExistingAccount()),
+              callback: () => _service.controller.goToBackupRecoverFlow()),
         ],
       )
     );

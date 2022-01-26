@@ -3,4 +3,15 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-enum RecoverModelPage { newAccount }
+enum RecoverModelPage {
+  backupYourAccount,
+  creatingKeys,
+  deviceQuestion,
+  error,
+  locked,
+  newAccount,
+  niceJob,
+  openQrCode,
+  pincode,
+  passphrase,
+}

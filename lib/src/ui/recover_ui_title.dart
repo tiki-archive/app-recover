@@ -10,12 +10,15 @@ class RecoverUiTitle extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Text(_text, style:TextStyle(
-      fontWeight: FontWeight.w600,
-      fontSize: 18,
-      fontFamily: ConfigFont.familyNunitoSans,
-      color: ConfigColor.tikiBlue,
-    ));
+    return Text(_text, textAlign: TextAlign.center,
+        style: TextStyle(
+          height: 1.2,
+          fontWeight: FontWeight.w400,
+          fontSize: 20,
+          fontFamily: ConfigFont.familyNunitoSans,
+          color: ConfigColor.tikiBlue,
+        )
+    );
   }
 
 }

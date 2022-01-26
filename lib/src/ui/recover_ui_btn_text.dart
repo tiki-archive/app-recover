@@ -13,6 +13,10 @@ class RecoverUiBtnText extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return TextButton(
+        style: TextButton.styleFrom(
+          fixedSize: Size(MediaQuery.of(context).size.width, double.infinity),
+          padding: EdgeInsets.symmetric(vertical: 20),
+        ),
         onPressed: () => _callback,
         child: Text(_text, style:TextStyle(
           fontWeight: FontWeight.w600,
