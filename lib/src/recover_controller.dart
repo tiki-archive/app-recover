@@ -9,4 +9,8 @@ class RecoverController {
   final RecoverService service;
 
   RecoverController(this.service);
+
+  void goToCreateNewAccount() {}
+
+  void goToUseExistingAccount() {}
 }
