@@ -5,8 +5,7 @@
 
 import 'package:flutter/widgets.dart';
 import 'package:recover/recover.dart';
-
-import '../widget/recover_widget_text.dart';
+import 'package:recover/src/widget/recover_widget_btn_text.dart';
 
 class RecoverUiViewNewAccount extends StatelessWidget {
   /*final String _email = 'tiki@mytiki.com';
@@ -41,8 +40,8 @@ class RecoverUiViewNewAccount extends StatelessWidget {
           ],
         ));*/
     return Container(
-      height: 200,
-      child: RecoverWidgetText('testing', _style),
+      height: 500,
+      child: Center(child: RecoverWidgetBtnText('testing', _style, () {})),
     );
   }
 }

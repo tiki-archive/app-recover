@@ -13,7 +13,8 @@ export 'src/recover_style.dart';
 class Recover {
   final RecoverService _service;
 
-  Recover({required RecoverStyle style}) : _service = RecoverService(style);
+  Recover({RecoverStyle? style})
+      : _service = RecoverService(style ?? RecoverStyle());
 
   Future<void> show(BuildContext context) => _service.presenter.render(context);
 }

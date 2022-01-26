@@ -25,8 +25,8 @@ class RecoverWidgetText extends StatelessWidget {
       return Text(_text,
           textAlign: TextAlign.center,
           style: TextStyle(
-              fontWeight: _style.textFontWeight,
-              fontSize: _style.textFontSize,
+              fontWeight: _style.textWeight,
+              fontSize: _style.fontSize,
               fontFamily: _style.fontFamily,
               color: _color ?? _style.textColor,
               fontStyle: _fontStyle ?? FontStyle.normal));
