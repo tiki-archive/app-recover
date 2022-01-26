@@ -5,9 +5,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:recover/src/recover_style.dart';
 
 import 'recover_service.dart';
+import 'recover_style.dart';
 import 'ui/recover_ui_layout.dart';
 
 class RecoverPresenter {
@@ -17,7 +17,6 @@ class RecoverPresenter {
   RecoverPresenter(this._service, this._style);
 
   Future<void> render(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return showModalBottomSheet<void>(
         context: context,
         isScrollControlled: true,
@@ -25,7 +24,7 @@ class RecoverPresenter {
         backgroundColor: _style.backgroundColor,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
-                top: Radius.circular(size.width * (_style.modalRadius) / 100))),
+                top: Radius.circular(_style.modalRadius))),
         builder: (BuildContext context) => ChangeNotifierProvider.value(
             value: _service, child: RecoverUiLayout(_style)));
   }

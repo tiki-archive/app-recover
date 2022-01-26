@@ -37,7 +37,9 @@ class openModal extends StatelessWidget {
     return TextButton(
         onPressed: () => Recover(
                 style: RecoverStyle(
-                    fontFamily: 'NunitoSans', textColor: Color(0xFF00133F)))
+                    mediaQueryData: MediaQuery.of(context),
+                    fontFamily: 'NunitoSans',
+                    textColor: Color(0xFF00133F)))
             .show(context),
         child: Text('Open Modal'));
   }

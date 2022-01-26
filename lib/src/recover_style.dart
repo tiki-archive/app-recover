@@ -6,20 +6,52 @@
 import 'package:flutter/material.dart';
 
 class RecoverStyle {
-  final Color backgroundColor;
-  final double modalRadius;
+  static const double _stdDevicePixelRatio = 3.0;
 
-  final String fontFamily;
+  final double _devicePixelRatio;
+  final double _textScaleFactor;
+  final Color _backgroundColor;
+  late final double _modalRadius;
 
-  final FontWeight textFontWeight;
-  final double textFontSize;
-  final Color textColor;
+  final String _fontFamily;
 
-  const RecoverStyle(
-      {this.backgroundColor = Colors.white,
-      this.modalRadius = 6,
-      this.fontFamily = 'Arial',
-      this.textFontWeight = FontWeight.w600,
-      this.textFontSize = 18,
-      this.textColor = Colors.black});
+  final FontWeight _textFontWeight;
+  late final double _textFontSize;
+  final Color _textColor;
+
+  RecoverStyle(
+      {MediaQueryData? mediaQueryData,
+      Color backgroundColor = Colors.white,
+      double modalRadius = 36,
+      String fontFamily = 'Arial',
+      FontWeight textFontWeight = FontWeight.w600,
+      double textFontSize = 18,
+      Color textColor = Colors.black})
+      : _textScaleFactor = mediaQueryData?.textScaleFactor ?? 1.0,
+        _devicePixelRatio = mediaQueryData?.devicePixelRatio ?? 3.0,
+        _backgroundColor = backgroundColor,
+        _fontFamily = fontFamily,
+        _textFontWeight = textFontWeight,
+        _textColor = textColor {
+    _modalRadius = _size(modalRadius);
+    _textFontSize = _text(textFontSize);
+  }
+
+  Color get textColor => _textColor;
+
+  double get textFontSize => _textFontSize;
+
+  FontWeight get textFontWeight => _textFontWeight;
+
+  String get fontFamily => _fontFamily;
+
+  double get modalRadius => _modalRadius;
+
+  Color get backgroundColor => _backgroundColor;
+
+  double _size(double raw) =>
+      (raw * (_devicePixelRatio / _stdDevicePixelRatio));
+
+  double _text(double raw) =>
+      (raw * (_devicePixelRatio / _stdDevicePixelRatio)) * _textScaleFactor;
 }
