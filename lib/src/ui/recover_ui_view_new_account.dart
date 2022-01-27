@@ -8,9 +8,9 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 import '../recover_service.dart';
-import 'recover_ui_btn_elevated.dart';
-import 'recover_ui_btn_text.dart';
-import 'recover_ui_title.dart';
+import '../widgets/recover_ui_btn_elevated.dart';
+import '../widgets/recover_ui_btn_text.dart';
+import '../widgets/recover_ui_title.dart';
 
 class RecoverUiViewNewAccount extends StatelessWidget {
 

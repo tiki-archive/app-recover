@@ -2,6 +2,9 @@
  * Copyright (c) TIKI Inc.
  * MIT license. See LICENSE file in root directory.
  */
+import 'package:barcode_scan2/barcode_scan2.dart';
+import 'package:permission_handler/permission_handler.dart';
+
 import 'model/recover_model_page.dart';
 
 import 'recover_service.dart';
@@ -23,6 +26,12 @@ class RecoverController {
 
   void goToOpenQrCode(){
     service.state.page = RecoverModelPage.openQrCode;
+    this.service.notify();
+  }
+
+
+  void goToQrCodeError() {
+    service.state.page = RecoverModelPage.openQrCodeError;
     this.service.notify();
   }
 
@@ -57,4 +66,37 @@ class RecoverController {
   }
 
   goToBackupRecoverFlow() {}
+
+  finish() {}
+
+  Future<void> scanQrCodePermission() async {
+    if (await Permission.camera.isGranted) {
+      scanQrCode();
+    }else{
+      PermissionStatus result = await Permission.camera.request();
+      if (result.isGranted) {
+        scanQrCode();
+      }else{
+        // TODO no permission granted for camera
+      }
+    }
+  }
+
+  void scanQrCode() async {
+    ScanResult result = await BarcodeScanner.scan();
+    if (result.type == ResultType.Barcode) {
+      List keys = result.rawContent.split(".");
+      if(verifyQrCode(keys)){
+        this.goToNiceJob();
+      }else{
+        this.goToQrCodeError();
+      }
+    }
+  }
+
+
+  bool verifyQrCode(List keys) {
+    return keys.length == 3;
+  }
+
 }

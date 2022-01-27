@@ -4,7 +4,7 @@ import '../config/config_color.dart';
 class RecoverUiBtnElevated extends StatelessWidget{
 
   late final String _text;
-  late final Function _callback;
+  late final _callback;
 
   RecoverUiBtnElevated({required text, required callback}) :
         _text = text,
@@ -13,7 +13,7 @@ class RecoverUiBtnElevated extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-        onPressed: () => _callback,
+        onPressed: _callback,
         child: Text(_text, style:TextStyle(
           fontWeight: FontWeight.w700,
           fontSize: 18,

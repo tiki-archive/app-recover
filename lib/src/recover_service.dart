@@ -26,7 +26,13 @@ class RecoverService extends ChangeNotifier {
 
   void notify() {
     notifyListeners();
-    model = RecoverModel();
-    model.email = email;
+  }
+
+  Future<void> createKeys() async{
+    await Future.delayed(Duration(seconds:1));
+  }
+
+  Future<void> backupKeys() async{
+    await Future.delayed(Duration(seconds:3));
   }
 }

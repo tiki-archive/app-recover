@@ -12,6 +12,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  permission_handler: ^8.3.0
+  barcode_scan2: ^4.2.0
   lottie: ^1.2.1
   logging: ^1.0.2
   provider: ^6.0.2
@@ -20,7 +23,14 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-fonts:
+
+flutter:
+  uses-material-design: true
+  generate: true
+  assets:
+    - res/animation/
+    - res/images/
+  fonts:
   - family: Koara
     fonts:
       - asset: res/fonts/Koara-Bold.ttf
@@ -71,4 +81,4 @@ fonts:
         weight: 500
   - family: SegoeUI
     fonts:
-      - asset: res/fonts/Segoe-UI.ttfls
+      - asset: res/fonts/Segoe-UI.ttf

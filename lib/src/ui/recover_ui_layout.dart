@@ -9,7 +9,10 @@ import 'package:provider/provider.dart';
 import '../model/recover_model_page.dart';
 import '../recover_service.dart';
 import 'recover_ui_view_creating_keys.dart';
+import 'recover_ui_view_device_question.dart';
 import 'recover_ui_view_new_account.dart';
+import 'recover_ui_view_nice_job.dart';
+import 'recover_ui_view_open_qr_code.dart';
 
 class RecoverUiLayout extends StatelessWidget {
   @override
@@ -38,11 +41,10 @@ class RecoverUiLayout extends StatelessWidget {
         // TODO: Handle this case.
         return Container();
       case RecoverModelPage.niceJob:
-        // TODO: Handle this case.
-        return Container();
+        return RecoverUiViewNiceJob();
       case RecoverModelPage.openQrCode:
-        // TODO: Handle this case.
-        return Container();
+      case RecoverModelPage.openQrCodeError:
+        return RecoverUiViewOpenQrCode();
       case RecoverModelPage.pincode:
         // TODO: Handle this case.
         return Container();

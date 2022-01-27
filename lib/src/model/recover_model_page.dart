@@ -12,6 +12,7 @@ enum RecoverModelPage {
   newAccount,
   niceJob,
   openQrCode,
+  openQrCodeError,
   pincode,
   passphrase,
 }

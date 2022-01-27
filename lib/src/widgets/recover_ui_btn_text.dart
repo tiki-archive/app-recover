@@ -4,7 +4,7 @@ import '../config/config_color.dart';
 class RecoverUiBtnText extends StatelessWidget{
 
   late final String _text;
-  late final Function _callback;
+  late final _callback;
 
   RecoverUiBtnText({required text, required callback}) :
       _text = text,
@@ -17,7 +17,7 @@ class RecoverUiBtnText extends StatelessWidget{
           fixedSize: Size(MediaQuery.of(context).size.width, double.infinity),
           padding: EdgeInsets.symmetric(vertical: 20),
         ),
-        onPressed: () => _callback,
+        onPressed: _callback,
         child: Text(_text, style:TextStyle(
           fontWeight: FontWeight.w600,
           fontSize: 18,

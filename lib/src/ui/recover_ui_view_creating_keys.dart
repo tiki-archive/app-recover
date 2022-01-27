@@ -5,13 +5,19 @@
 
 import 'package:flutter/widgets.dart';
 import 'package:lottie/lottie.dart';
-import 'recover_ui_title.dart';
+import 'package:provider/provider.dart';
+import '../recover_service.dart';
+import '../widgets/recover_ui_title.dart';
 
 class RecoverUiViewCreatingKeys extends StatelessWidget {
   final String _title = 'Creating your account...';
 
+
+
+
   @override
   Widget build(BuildContext context) {
+    _awaitKeysCreation(context);
     return Container(height: MediaQuery.of(context).size.height/2,
         padding: EdgeInsets.only(top: 70, left: 20, right:20),
         child: Column(
@@ -34,5 +40,16 @@ class RecoverUiViewCreatingKeys extends StatelessWidget {
         ],
       )
     );
+  }
+
+  void _awaitKeysCreation(BuildContext context) {
+    WidgetsBinding.instance?.addPostFrameCallback((_) async {
+      RecoverService service = Provider.of<RecoverService>(context);
+      await Future.wait([
+        service.createKeys(),
+        Future.delayed(Duration(seconds:2))
+      ]);
+      service.controller.goToBackupYourAccount();
+    });
   }
 }
