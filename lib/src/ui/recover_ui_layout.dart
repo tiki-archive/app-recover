@@ -7,6 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:recover/src/ui/recover_ui_view_backup_question.dart';
 
+import '../../recover.dart';
 import '../model/recover_model_page.dart';
 import '../recover_service.dart';
 import 'recover_ui_view_creating_keys.dart';
@@ -16,6 +17,9 @@ import 'recover_ui_view_nice_job.dart';
 import 'recover_ui_view_open_qr_code.dart';
 
 class RecoverUiLayout extends StatelessWidget {
+  final RecoverStyle _style;
+  RecoverUiLayout(this._style);
+
   @override
   Widget build(BuildContext context) {
     RecoverService service = Provider.of<RecoverService>(context);

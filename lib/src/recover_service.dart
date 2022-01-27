@@ -10,6 +10,7 @@ import 'model/recover_model_config.dart';
 import 'model/recover_model_state.dart';
 import 'recover_controller.dart';
 import 'recover_presenter.dart';
+import 'recover_style.dart';
 
 class RecoverService extends ChangeNotifier {
   final RecoverModelState state = RecoverModelState();
@@ -17,6 +18,8 @@ class RecoverService extends ChangeNotifier {
   late final RecoverController controller;
   late final RecoverModel model;
 
+  RecoverService(RecoverStyle style) {
+    presenter = RecoverPresenter(this, style);
   RecoverService(String email, RecoverModelConfig config) {
     presenter = RecoverPresenter(this, config);
     controller = RecoverController(this);

@@ -10,9 +10,9 @@ import 'model/recover_model_page.dart';
 import 'recover_service.dart';
 
 class RecoverController {
-  final RecoverService service;
+  final RecoverService _service;
 
-  RecoverController(this.service);
+  RecoverController(this._service);
 
   void goToCreateNewAccount() {
     service.state.page = RecoverModelPage.creatingKeys;
