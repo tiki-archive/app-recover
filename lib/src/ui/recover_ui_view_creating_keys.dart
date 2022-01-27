@@ -44,7 +44,7 @@ class RecoverUiViewCreatingKeys extends StatelessWidget {
 
   void _awaitKeysCreation(BuildContext context) {
     WidgetsBinding.instance?.addPostFrameCallback((_) async {
-      RecoverService service = Provider.of<RecoverService>(context);
+      RecoverService service = Provider.of<RecoverService>(context, listen:false);
       await Future.wait([
         service.createKeys(),
         Future.delayed(Duration(seconds:2))
