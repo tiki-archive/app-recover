@@ -29,7 +29,7 @@ class RecoverService extends ChangeNotifier {
   }
 
   Future<void> createKeys() async{
-    await Future.delayed(Duration(seconds:1));
+    await Future.delayed(Duration(seconds:5));
   }
 
   Future<void> backupKeys() async{

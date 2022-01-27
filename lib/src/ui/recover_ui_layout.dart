@@ -5,6 +5,7 @@
 
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
+import 'package:recover/src/ui/recover_ui_view_backup_question.dart';
 
 import '../model/recover_model_page.dart';
 import '../recover_service.dart';
@@ -30,8 +31,7 @@ class RecoverUiLayout extends StatelessWidget {
       case RecoverModelPage.newAccount:
         return RecoverUiViewNewAccount();
       case RecoverModelPage.backupYourAccount:
-        // TODO: Handle this case.
-        return Container();
+        return RecoverUiViewBackupQuestion();
       case RecoverModelPage.deviceQuestion:
         return RecoverUiViewDeviceQuestion();
       case RecoverModelPage.error:
