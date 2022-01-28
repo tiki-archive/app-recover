@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 import '../../recover.dart';
 import '../model/recover_model_page.dart';
 import '../recover_service.dart';
-import 'recover_ui_view_new_account.dart';
+import 'recover_ui_view_account.dart';
 
 class RecoverUiLayout extends StatelessWidget {
   final RecoverStyle _style;
@@ -30,8 +30,51 @@ class RecoverUiLayout extends StatelessWidget {
 
   Widget _page(RecoverModelPage page) {
     switch (page) {
-      case RecoverModelPage.newAccount:
-        return RecoverUiViewNewAccount(_style);
+      case RecoverModelPage.account:
+        return RecoverUiViewAccount(_style);
+      case RecoverModelPage.creating:
+        // TODO: Handle this case.
+        break;
+      case RecoverModelPage.backup:
+        // TODO: Handle this case.
+        break;
+      case RecoverModelPage.backupPin:
+        // TODO: Handle this case.
+        break;
+      case RecoverModelPage.backupPassphrase:
+        // TODO: Handle this case.
+        break;
+      case RecoverModelPage.success:
+        // TODO: Handle this case.
+        break;
+      case RecoverModelPage.recover:
+        // TODO: Handle this case.
+        break;
+      case RecoverModelPage.qrCode:
+        // TODO: Handle this case.
+        break;
+      case RecoverModelPage.recoverPin:
+        // TODO: Handle this case.
+        break;
+      case RecoverModelPage.recoverPassphrase:
+        // TODO: Handle this case.
+        break;
+      case RecoverModelPage.locked:
+        // TODO: Handle this case.
+        break;
+      case RecoverModelPage.error:
+        // TODO: Handle this case.
+        break;
+      case RecoverModelPage.cycle:
+        // TODO: Handle this case.
+        break;
+      case RecoverModelPage.cyclePin:
+        // TODO: Handle this case.
+        break;
+      case RecoverModelPage.cyclePassphrase:
+        // TODO: Handle this case.
+        break;
     }
+    throw UnimplementedError();
   }
 }

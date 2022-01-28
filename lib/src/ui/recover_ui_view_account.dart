@@ -4,10 +4,11 @@
  */
 
 import 'package:flutter/widgets.dart';
-import 'package:recover/recover.dart';
-import 'package:recover/src/widget/recover_widget_btn_text.dart';
 
-class RecoverUiViewNewAccount extends StatelessWidget {
+import '../../recover.dart';
+import '../widget/recover_widget_btn_text.dart';
+
+class RecoverUiViewAccount extends StatelessWidget {
   /*final String _email = 'tiki@mytiki.com';
   final String _title = 'We can’t find an account on this device for ';
   final String _opt1Txt = 'Create New Account';
@@ -26,7 +27,7 @@ class RecoverUiViewNewAccount extends StatelessWidget {
   };*/
 
   final RecoverStyle _style;
-  RecoverUiViewNewAccount(this._style);
+  RecoverUiViewAccount(this._style);
 
   @override
   Widget build(BuildContext context) {
