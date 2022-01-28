@@ -6,11 +6,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
+import 'package:recover/src/widget/recover_widget_btn_elev.dart';
+import 'package:recover/src/widget/recover_widget_btn_text.dart';
+import 'package:recover/src/widget/recover_widget_title.dart';
 
 import '../recover_service.dart';
-import '../widgets/recover_ui_btn_elevated.dart';
-import '../widgets/recover_ui_btn_text.dart';
-import '../widgets/recover_ui_title.dart';
 
 class RecoverUiViewDeviceQuestion extends StatelessWidget {
 
@@ -32,13 +32,14 @@ class RecoverUiViewDeviceQuestion extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(padding: EdgeInsets.symmetric(horizontal:20), child: RecoverUiTitle(_title)),
+          Container(padding: EdgeInsets.symmetric(horizontal:20),
+              child: RecoverWidgetTitle(_title)),
           Padding(padding: EdgeInsets.only(bottom:40)),
-          RecoverUiBtnElevated(
+          RecoverWidgetBtnElev(
               text: _opt1Txt,
               callback: () => _service.controller.goToOpenQrCode()),
           Padding(padding: EdgeInsets.only(bottom:30)),
-          RecoverUiBtnText(
+          RecoverWidgetBtnText(
               text: _opt2Txt,
               callback: () => _service.controller.goToBackupRecoverFlow()),
         ],

@@ -17,8 +17,6 @@ import 'recover_ui_view_nice_job.dart';
 import 'recover_ui_view_open_qr_code.dart';
 
 class RecoverUiLayout extends StatelessWidget {
-  final RecoverStyle _style;
-  RecoverUiLayout(this._style);
 
   @override
   Widget build(BuildContext context) {

@@ -6,14 +6,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
-import 'package:recover/src/model/recover_model_page.dart';
-import 'package:recover/src/widgets/recover_ui_hint.dart';
-import 'package:recover/src/widgets/recover_ui_title_error.dart';
+import '../model/recover_model_page.dart';
+import '../widget/recover_widget_btn_elev.dart';
+import '../widget/recover_widget_hint.dart';
+import '../widget/recover_widget_title.dart';
+import '../widget/recover_widget_title_error.dart';
 
 import '../recover_service.dart';
-import '../widgets/recover_ui_btn_elevated.dart';
-import '../widgets/recover_ui_btn_text.dart';
-import '../widgets/recover_ui_title.dart';
 
 class RecoverUiViewOpenQrCode extends StatelessWidget {
 
@@ -36,15 +35,15 @@ class RecoverUiViewOpenQrCode extends StatelessWidget {
         children: [
           Container(padding: EdgeInsets.symmetric(horizontal:20),
               child: _service.state.page == RecoverModelPage.openQrCode ?
-               RecoverUiTitle(_title) :
-               RecoverUiTitleError(_titleError)
+               RecoverWidgetTitle(_title) :
+               RecoverWidgetTitleError(_titleError)
           ),
           Padding(padding: EdgeInsets.only(bottom:40)),
           Container(padding: EdgeInsets.symmetric(horizontal:20),
-            child: RecoverUiHint(_hint)
+            child: RecoverWidgetHint(_hint)
           ),
           Padding(padding: EdgeInsets.only(bottom:30)),
-          RecoverUiBtnElevated(
+          RecoverWidgetBtnElev(
               text: _opt1Txt,
               callback: () => _service.controller.scanQrCodePermission()),
         ],

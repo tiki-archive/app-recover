@@ -6,11 +6,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
+import '../widget/recover_widget_btn_elev.dart';
+import '../widget/recover_widget_btn_text.dart';
+import '../widget/recover_widget_title.dart';
 
 import '../recover_service.dart';
-import '../widgets/recover_ui_btn_elevated.dart';
-import '../widgets/recover_ui_btn_text.dart';
-import '../widgets/recover_ui_title.dart';
 
 class RecoverUiViewNewAccount extends StatelessWidget {
 
@@ -24,7 +24,7 @@ class RecoverUiViewNewAccount extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     this._service = Provider.of<RecoverService>(context);
-    this._email = _service.model.email!;
+    this._email = _service.model.email;
     return Container(
       height: MediaQuery.of(context).size.height/2,
       padding: EdgeInsets.only(top: 70, left: 20, right:20),
@@ -32,13 +32,14 @@ class RecoverUiViewNewAccount extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(padding: EdgeInsets.symmetric(horizontal:30), child: RecoverUiTitle(_title + _email)),
+          Container(padding: EdgeInsets.symmetric(horizontal:30),
+              child: RecoverWidgetTitle(_title + _email)),
           Padding(padding: EdgeInsets.only(bottom:40)),
-          RecoverUiBtnElevated(
+          RecoverWidgetBtnElev(
               text: _opt1Txt,
               callback: () => _service.controller.goToCreateNewAccount()),
           Padding(padding: EdgeInsets.only(bottom:30)),
-          RecoverUiBtnText(
+          RecoverWidgetBtnText(
               text: _opt2Txt,
               callback: () => _service.controller.goToUseExistingAccount()),
         ],

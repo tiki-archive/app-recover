@@ -14,7 +14,8 @@ class RecoverPresenter {
   final RecoverService _service;
   final RecoverStyle _style;
 
-  RecoverPresenter(this._service, this._style);
+  RecoverPresenter(this._service) :
+    _style = _service.model.style;
 
   Future<void> render(BuildContext context) {
     return showModalBottomSheet<void>(
@@ -26,6 +27,6 @@ class RecoverPresenter {
             borderRadius: BorderRadius.vertical(
                 top: Radius.circular(_style.modalRadius))),
         builder: (BuildContext context) => ChangeNotifierProvider.value(
-            value: _service, child: RecoverUiLayout(_style)));
+            value: _service, child: RecoverUiLayout()));
   }
 }

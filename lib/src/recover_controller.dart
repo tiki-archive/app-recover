@@ -15,54 +15,54 @@ class RecoverController {
   RecoverController(this._service);
 
   void goToCreateNewAccount() {
-    service.state.page = RecoverModelPage.creatingKeys;
-    this.service.notify();
+    _service.state.page = RecoverModelPage.creatingKeys;
+    _service.notify();
   }
 
   void goToUseExistingAccount() {
-    service.state.page = RecoverModelPage.deviceQuestion;
-    this.service.notify();
+    _service.state.page = RecoverModelPage.deviceQuestion;
+    _service.notify();
   }
 
   void goToOpenQrCode(){
-    service.state.page = RecoverModelPage.openQrCode;
-    this.service.notify();
+    _service.state.page = RecoverModelPage.openQrCode;
+    _service.notify();
   }
 
 
   void goToQrCodeError() {
-    service.state.page = RecoverModelPage.openQrCodeError;
-    this.service.notify();
+    _service.state.page = RecoverModelPage.openQrCodeError;
+    _service.notify();
   }
 
   void goToNiceJob(){
-    service.state.page = RecoverModelPage.niceJob;
-    this.service.notify();
+    _service.state.page = RecoverModelPage.niceJob;
+    _service.notify();
   }
 
   void goToBackupYourAccount(){
-    service.state.page = RecoverModelPage.backupYourAccount;
-    this.service.notify();
+    _service.state.page = RecoverModelPage.backupYourAccount;
+    _service.notify();
   }
 
   void goToPinCode(){
-    service.state.page = RecoverModelPage.pincode;
-    this.service.notify();
+    _service.state.page = RecoverModelPage.pincode;
+    _service.notify();
   }
 
   void goToPassphrase(){
-    service.state.page = RecoverModelPage.passphrase;
-    this.service.notify();
+    _service.state.page = RecoverModelPage.passphrase;
+    _service.notify();
   }
 
   void goToLocked(){
-    service.state.page = RecoverModelPage.locked;
-    service.notify();
+    _service.state.page = RecoverModelPage.locked;
+    _service.notify();
   }
 
   void goToError(){
-    service.state.page = RecoverModelPage.error;
-    service.notify();
+    _service.state.page = RecoverModelPage.error;
+    _service.notify();
   }
 
   goToBackupRecoverFlow() {}

@@ -6,8 +6,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import '../widget/recover_widget_title.dart';
 import '../recover_service.dart';
-import '../widgets/recover_ui_title.dart';
 
 class RecoverUiViewCreatingKeys extends StatelessWidget {
   final String _title = 'Creating your account...';
@@ -25,7 +25,8 @@ class RecoverUiViewCreatingKeys extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Container(padding: EdgeInsets.symmetric(horizontal:30), child: RecoverUiTitle(_title)),
+            Container(padding: EdgeInsets.symmetric(horizontal:30), child:
+              RecoverWidgetTitle(_title)),
             Padding(padding: EdgeInsets.only(bottom:10)),
           Expanded(
             child: ClipRect(

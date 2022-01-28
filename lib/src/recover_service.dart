@@ -6,7 +6,6 @@
 import 'package:flutter/widgets.dart';
 
 import 'model/recover_model.dart';
-import 'model/recover_model_config.dart';
 import 'model/recover_model_state.dart';
 import 'recover_controller.dart';
 import 'recover_presenter.dart';
@@ -18,13 +17,17 @@ class RecoverService extends ChangeNotifier {
   late final RecoverController controller;
   late final RecoverModel model;
 
-  RecoverService(RecoverStyle style) {
-    presenter = RecoverPresenter(this, style);
-  RecoverService(String email, RecoverModelConfig config) {
-    presenter = RecoverPresenter(this, config);
+  RecoverService({
+    required String email,
+    required String token,
+    required RecoverStyle style
+  }) {
+    presenter = RecoverPresenter(this);
     controller = RecoverController(this);
     model = RecoverModel();
     model.email = email;
+    model.token = token;
+    model.style = style;
   }
 
   void notify() {

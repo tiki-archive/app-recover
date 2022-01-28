@@ -19,9 +19,15 @@ class RecoverStyle {
   final Color _textColor;
   final FontWeight _textWeight;
 
+  final Color _hintColor;
+  final Color _errorColor;
+  final Color _titleColor;
+  late final double _titleSize;
+
+
   late final double _buttonWidth;
   late final double _buttonHeight;
-  late final double _buttonRaidus;
+  late final double _buttonRadius;
   final Color _buttonColor;
   final Color _buttonTextColor;
   final FontWeight _buttonTextWeight;
@@ -32,12 +38,16 @@ class RecoverStyle {
       double modalRadius = 36,
       String fontFamily = 'Arial',
       double fontSize = 18,
+      double titleSize = 20,
       Color textColor = Colors.black,
+      Color hintColor = Colors.black26,
+      Color errorColor = Colors.red,
       FontWeight textWeight = FontWeight.w600,
       double buttonWidth = 324,
       double buttonHeight = 58,
       double buttonRadius = 12,
       Color buttonColor = Colors.red,
+      Color titleColor = Colors.blue,
       Color buttonTextColor = Colors.white,
       FontWeight buttonTextWeight = FontWeight.w700})
       : _textScaleFactor = mediaQueryData?.textScaleFactor ?? 1.0,
@@ -46,6 +56,9 @@ class RecoverStyle {
         _fontFamily = fontFamily,
         _textColor = textColor,
         _textWeight = textWeight,
+        _hintColor = hintColor,
+        _errorColor = errorColor,
+        _titleColor = titleColor,
         _buttonColor = buttonColor,
         _buttonTextColor = buttonTextColor,
         _buttonTextWeight = buttonTextWeight {
@@ -53,7 +66,8 @@ class RecoverStyle {
     _fontSize = text(fontSize);
     _buttonWidth = size(buttonWidth);
     _buttonHeight = size(buttonHeight);
-    _buttonRaidus = size(buttonRadius);
+    _buttonRadius = size(buttonRadius);
+    _titleSize = text(titleSize);
   }
 
   double size(double raw) => (raw * (_devicePixelRatio / _stdDevicePixelRatio));
@@ -69,6 +83,8 @@ class RecoverStyle {
 
   double get fontSize => _fontSize;
 
+  double get titleSize => _titleSize;
+
   Color get textColor => _textColor;
 
   FontWeight get textWeight => _textWeight;
@@ -77,11 +93,17 @@ class RecoverStyle {
 
   double get buttonHeight => _buttonHeight;
 
-  double get buttonRaidus => _buttonRaidus;
+  double get buttonRaidus => _buttonRadius;
 
   Color get buttonColor => _buttonColor;
 
   Color get buttonTextColor => _buttonTextColor;
 
   FontWeight get buttonTextWeight => _buttonTextWeight;
+
+  Color get hintColor => _hintColor;
+
+  Color get errorColor => _errorColor;
+
+  Color get titleColor => _titleColor;
 }

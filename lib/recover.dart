@@ -13,12 +13,12 @@ export 'src/recover_style.dart';
 class Recover {
   final RecoverService _service;
 
-  Recover({Color? backgroundColor, double? topRadius})
+  Recover({required String email, required String token, RecoverStyle? style})
       : _service = RecoverService(
-            "tiki@mytiki.com",
-            RecoverModelConfig(backgroundColor: backgroundColor));
-  Recover({RecoverStyle? style})
-      : _service = RecoverService(style ?? RecoverStyle());
+        email: email,
+        token: token,
+        style: style ?? RecoverStyle()
+  );
 
   Future<void> show(BuildContext context) => _service.presenter.render(context);
 }

@@ -6,12 +6,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
-import 'package:recover/src/widgets/recover_ui_hint.dart';
+import '../widget/recover_widget_btn_elev.dart';
+import '../widget/recover_widget_title.dart';
 
 import '../recover_service.dart';
-import '../widgets/recover_ui_btn_elevated.dart';
-import '../widgets/recover_ui_btn_text.dart';
-import '../widgets/recover_ui_title.dart';
 
 class RecoverUiViewNiceJob extends StatelessWidget {
 
@@ -32,11 +30,12 @@ class RecoverUiViewNiceJob extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(padding: EdgeInsets.symmetric(horizontal:30), child: RecoverUiTitle(_title)),
+            Container(padding: EdgeInsets.symmetric(horizontal:30),
+                child: RecoverWidgetTitle(_title)),
             Padding(padding: EdgeInsets.only(bottom:40)),
             Image.asset("res/images/tiki-pizza.png", width: 75, package: 'recover'),
             Padding(padding: EdgeInsets.only(bottom:30)),
-            RecoverUiBtnElevated(
+            RecoverWidgetBtnElev(
                 text: _opt1Txt,
                 callback: () => _service.controller.finish()),
           ],
