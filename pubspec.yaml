@@ -12,7 +12,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
   permission_handler: ^8.3.0
   barcode_scan2: ^4.2.0
   lottie: ^1.2.1
