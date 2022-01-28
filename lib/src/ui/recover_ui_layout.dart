@@ -3,41 +3,56 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../recover.dart';
 import '../model/recover_model_page.dart';
 import '../recover_service.dart';
+import '../widget/recover_widget_icons.dart';
 import 'recover_ui_view_account.dart';
+import 'recover_ui_view_backup.dart';
+import 'recover_ui_view_creating.dart';
+import 'recover_ui_view_qr_code.dart';
+import 'recover_ui_view_recover.dart';
+import 'recover_ui_view_success.dart';
 
 class RecoverUiLayout extends StatelessWidget {
-  final RecoverStyle _style;
-  RecoverUiLayout(this._style);
-
   @override
   Widget build(BuildContext context) {
     RecoverService service = Provider.of<RecoverService>(context);
     return Container(
-        child: Column(mainAxisSize: MainAxisSize.min, children: [
-      //KeysModalViewHeader(),
-      Container(
-        padding: EdgeInsets.only(left: 6, right: 6, bottom: 5),
-        child: _page(service.state.page),
-      )
-    ]));
+        padding: EdgeInsets.only(top: service.style.size(8)),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextButton(
+                    onPressed: () {},
+                    child: Icon(RecoverWidgetIcons.arrow,
+                        size: service.style.modalNavIconSize,
+                        color: service.style.modalNavColor)),
+                TextButton(
+                    onPressed: () {},
+                    child: Icon(RecoverWidgetIcons.x,
+                        size: service.style.modalNavIconSize,
+                        color: service.style.modalNavColor))
+              ],
+            ),
+            _page(service.state.page)
+          ],
+        ));
   }
 
   Widget _page(RecoverModelPage page) {
     switch (page) {
       case RecoverModelPage.account:
-        return RecoverUiViewAccount(_style);
+        return RecoverUiViewAccount();
       case RecoverModelPage.creating:
-        // TODO: Handle this case.
-        break;
+        return RecoverUiViewCreating();
       case RecoverModelPage.backup:
-        // TODO: Handle this case.
-        break;
+        return RecoverUiViewBackup();
       case RecoverModelPage.backupPin:
         // TODO: Handle this case.
         break;
@@ -45,14 +60,11 @@ class RecoverUiLayout extends StatelessWidget {
         // TODO: Handle this case.
         break;
       case RecoverModelPage.success:
-        // TODO: Handle this case.
-        break;
+        return RecoverUiViewSuccess();
       case RecoverModelPage.recover:
-        // TODO: Handle this case.
-        break;
+        return RecoverUiViewRecover();
       case RecoverModelPage.qrCode:
-        // TODO: Handle this case.
-        break;
+        return RecoverUiViewQrCode();
       case RecoverModelPage.recoverPin:
         // TODO: Handle this case.
         break;

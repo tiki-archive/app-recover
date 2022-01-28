@@ -3,8 +3,6 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-import 'dart:typed_data';
-
 import 'package:flutter/widgets.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:httpp/httpp.dart';
@@ -17,13 +15,14 @@ import 'recover_presenter.dart';
 import 'recover_style.dart';
 
 class RecoverService extends ChangeNotifier {
-  final RecoverModelState state = RecoverModelState();
+  final RecoverModelState state;
+  final RecoverStyle style;
   final TikiKeysService _keysService;
   final TikiBkupService _bkupService;
   late final RecoverPresenter presenter;
   late final RecoverController controller;
 
-  RecoverService(RecoverStyle style,
+  RecoverService(this.state, this.style,
       {FlutterSecureStorage? secureStorage, Httpp? httpp})
       : _keysService = TikiKeysService(secureStorage: secureStorage),
         _bkupService = TikiBkupService(httpp: httpp) {
@@ -36,7 +35,7 @@ class RecoverService extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> decode(String address, String data, String sign) async {
+  /*Future<void> decode(String address, String data, String sign) async {
     try {
       state.keys = TikiKeysModel.decode(address, sign, data);
       return _keysService.provide(state.keys!);
@@ -96,5 +95,10 @@ class RecoverService extends ChangeNotifier {
         onSuccess: () {
           //backup worked
         });
+  }*/
+
+  Future<void> generate() async {
+    state.keys = await _keysService.generate();
+    notifyListeners();
   }
 }

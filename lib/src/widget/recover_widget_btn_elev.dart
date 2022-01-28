@@ -4,33 +4,36 @@
  */
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../recover_service.dart';
 import '../recover_style.dart';
 
 class RecoverWidgetBtnElev extends StatelessWidget {
   final String _text;
-  final RecoverStyle _style;
   final void Function() _callback;
 
-  RecoverWidgetBtnElev(this._text, this._callback, this._style);
+  RecoverWidgetBtnElev(this._text, this._callback);
 
   @override
   Widget build(BuildContext context) {
+    RecoverStyle style =
+        Provider.of<RecoverService>(context, listen: false).style;
     return ElevatedButton(
       onPressed: () => _callback,
       child: Text(_text,
           style: TextStyle(
-            fontFamily: _style.fontFamily,
-            fontWeight: _style.buttonTextWeight,
-            fontSize: _style.fontSize,
-            color: _style.buttonTextColor,
+            fontFamily: style.fontFamily,
+            fontWeight: style.buttonTextWeight,
+            fontSize: style.fontSize,
+            color: style.buttonTextColor,
           )),
       style: ElevatedButton.styleFrom(
-        fixedSize: Size(_style.buttonWidth, _style.buttonHeight),
-        primary: _style.buttonColor,
+        fixedSize: Size(style.buttonWidth, style.buttonHeight),
+        primary: style.buttonColor,
         shape: RoundedRectangleBorder(
             borderRadius:
-                BorderRadius.all(Radius.circular(_style.buttonRaidus))),
+                BorderRadius.all(Radius.circular(style.buttonRadius))),
       ),
     );
   }

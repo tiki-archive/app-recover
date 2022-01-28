@@ -21,12 +21,21 @@ dependencies:
   wallet:
     git:
       url: https://github.com/tiki/wallet
-      ref: ^0.0.4
+      ref: 0.0.4
   httpp:
     git:
       url: https://github.com/tiki/httpp
-      ref: ^0.0.3
+      ref: 0.0.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+flutter:
+  assets:
+    - packages/recover/res/images/tiki-pizza.png
+    - packages/recover/res/animation/creating.json
+  fonts:
+    - family: RecoverIcons
+      fonts:
+        - asset: packages/recover/res/fonts/RecoverIcons.ttf

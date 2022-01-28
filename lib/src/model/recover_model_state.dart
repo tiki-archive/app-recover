@@ -10,7 +10,7 @@ import 'package:wallet/wallet.dart';
 import 'recover_model_page.dart';
 
 class RecoverModelState {
-  RecoverModelPage page = RecoverModelPage.account;
+  RecoverModelPage page = RecoverModelPage.recover;
 
   String? email;
   String? accessToken;
@@ -22,4 +22,8 @@ class RecoverModelState {
 
   Uint8List? ciphertext;
   TikiKeysModel? keys;
+
+  bool isError = false;
+
+  RecoverModelState({this.email, this.accessToken});
 }

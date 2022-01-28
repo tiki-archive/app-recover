@@ -14,8 +14,7 @@ class RecoverPresenter {
   final RecoverService _service;
   final RecoverStyle _style;
 
-  RecoverPresenter(this._service) :
-    _style = _service.model.style;
+  RecoverPresenter(this._service, this._style);
 
   Future<void> render(BuildContext context) {
     return showModalBottomSheet<void>(
