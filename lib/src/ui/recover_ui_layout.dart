@@ -5,54 +5,76 @@
 
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
-import 'package:recover/src/ui/recover_ui_view_backup_question.dart';
 
 import '../../recover.dart';
 import '../model/recover_model_page.dart';
 import '../recover_service.dart';
-import 'recover_ui_view_creating_keys.dart';
-import 'recover_ui_view_device_question.dart';
-import 'recover_ui_view_new_account.dart';
-import 'recover_ui_view_nice_job.dart';
-import 'recover_ui_view_open_qr_code.dart';
+import 'recover_ui_view_account.dart';
 
 class RecoverUiLayout extends StatelessWidget {
+  final RecoverStyle _style;
+  RecoverUiLayout(this._style);
 
   @override
   Widget build(BuildContext context) {
     RecoverService service = Provider.of<RecoverService>(context);
     return Container(
-        child: _page(service.state.page)
-    );
+        child: Column(mainAxisSize: MainAxisSize.min, children: [
+      //KeysModalViewHeader(),
+      Container(
+        padding: EdgeInsets.only(left: 6, right: 6, bottom: 5),
+        child: _page(service.state.page),
+      )
+    ]));
   }
 
   Widget _page(RecoverModelPage page) {
     switch (page) {
-      case RecoverModelPage.creatingKeys:
-        return RecoverUiViewCreatingKeys();
-      case RecoverModelPage.newAccount:
-        return RecoverUiViewNewAccount();
-      case RecoverModelPage.backupYourAccount:
-        return RecoverUiViewBackupQuestion();
-      case RecoverModelPage.deviceQuestion:
-        return RecoverUiViewDeviceQuestion();
-      case RecoverModelPage.error:
+      case RecoverModelPage.account:
+        return RecoverUiViewAccount(_style);
+      case RecoverModelPage.creating:
         // TODO: Handle this case.
-        return Container();
+        break;
+      case RecoverModelPage.backup:
+        // TODO: Handle this case.
+        break;
+      case RecoverModelPage.backupPin:
+        // TODO: Handle this case.
+        break;
+      case RecoverModelPage.backupPassphrase:
+        // TODO: Handle this case.
+        break;
+      case RecoverModelPage.success:
+        // TODO: Handle this case.
+        break;
+      case RecoverModelPage.recover:
+        // TODO: Handle this case.
+        break;
+      case RecoverModelPage.qrCode:
+        // TODO: Handle this case.
+        break;
+      case RecoverModelPage.recoverPin:
+        // TODO: Handle this case.
+        break;
+      case RecoverModelPage.recoverPassphrase:
+        // TODO: Handle this case.
+        break;
       case RecoverModelPage.locked:
         // TODO: Handle this case.
-        return Container();
-      case RecoverModelPage.niceJob:
-        return RecoverUiViewNiceJob();
-      case RecoverModelPage.openQrCode:
-      case RecoverModelPage.openQrCodeError:
-        return RecoverUiViewOpenQrCode();
-      case RecoverModelPage.pincode:
+        break;
+      case RecoverModelPage.error:
         // TODO: Handle this case.
-        return Container();
-      case RecoverModelPage.passphrase:
+        break;
+      case RecoverModelPage.cycle:
         // TODO: Handle this case.
-        return Container();
+        break;
+      case RecoverModelPage.cyclePin:
+        // TODO: Handle this case.
+        break;
+      case RecoverModelPage.cyclePassphrase:
+        // TODO: Handle this case.
+        break;
     }
+    throw UnimplementedError();
   }
 }

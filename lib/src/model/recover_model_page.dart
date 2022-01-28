@@ -4,15 +4,19 @@
  */
 
 enum RecoverModelPage {
-  backupYourAccount,
-  creatingKeys,
-  deviceQuestion,
-  error,
+  account,
+  creating,
+  backup,
+  backupPin,
+  backupPassphrase,
+  success,
+  recover,
+  qrCode,
+  recoverPin,
+  recoverPassphrase,
   locked,
-  newAccount,
-  niceJob,
-  openQrCode,
-  openQrCodeError,
-  pincode,
-  passphrase,
+  error,
+  cycle,
+  cyclePin,
+  cyclePassphrase
 }
