@@ -5,26 +5,23 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:provider/provider.dart';
 
-import '../recover_service.dart';
 import '../widget/recover_widget_btn_elev.dart';
 import '../widget/recover_widget_btn_text.dart';
 import '../widget/recover_widget_text.dart';
+import 'recover_ui_view.dart';
 
-class RecoverUiViewBackup extends StatelessWidget {
+class RecoverUiViewBackup extends RecoverUiView {
   static const String _title =
       'Backup your account. We can all be a bit clumsy at times.';
   static const String _opt1Txt = 'Continue';
   static const String _opt2Txt = 'Skip (experts only)';
 
   @override
-  Widget build(BuildContext context) {
-    RecoverService service =
-        Provider.of<RecoverService>(context, listen: false);
+  Widget page(BuildContext context) {
     return Container(
-        height: service.style.modalContainerHeight,
-        padding: EdgeInsets.all(service.style.modalContentPadding),
+        height: style.modalContainerHeight,
+        padding: EdgeInsets.all(style.modalContentPadding),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           mainAxisSize: MainAxisSize.max,
@@ -32,23 +29,21 @@ class RecoverUiViewBackup extends StatelessWidget {
           children: [
             Container(
                 padding: EdgeInsets.symmetric(
-                    horizontal: service.style.textPaddingHorizontal),
+                    horizontal: style.textPaddingHorizontal),
                 child: RecoverWidgetText(_title)),
             Expanded(
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                  RecoverWidgetBtnElev(_opt1Txt, () {
-                    /*_service.controller.goToBackupRecoverFlow()*/
-                  }),
+                  RecoverWidgetBtnElev(_opt1Txt, () {}),
                   Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: service.style.size(10))),
-                  RecoverWidgetBtnText(_opt2Txt, () {
-                    /*_service.controller.goToNiceJob()*/
-                  })
+                      padding: EdgeInsets.symmetric(vertical: style.size(10))),
+                  RecoverWidgetBtnText(_opt2Txt, controller.showSuccess)
                 ])),
           ],
         ));
   }
+
+  @override
+  void back(BuildContext context) => controller.showAccount();
 }

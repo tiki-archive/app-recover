@@ -19,11 +19,12 @@ class RecoverService extends ChangeNotifier {
   final RecoverStyle style;
   final TikiKeysService _keysService;
   final TikiBkupService _bkupService;
+  final void Function(String?)? onComplete;
   late final RecoverPresenter presenter;
   late final RecoverController controller;
 
   RecoverService(this.state, this.style,
-      {FlutterSecureStorage? secureStorage, Httpp? httpp})
+      {FlutterSecureStorage? secureStorage, Httpp? httpp, this.onComplete})
       : _keysService = TikiKeysService(secureStorage: secureStorage),
         _bkupService = TikiBkupService(httpp: httpp) {
     presenter = RecoverPresenter(this, style);
@@ -31,6 +32,7 @@ class RecoverService extends ChangeNotifier {
   }
 
   void showPage(RecoverModelPage page) {
+    state.previous = state.page;
     state.page = page;
     notifyListeners();
   }

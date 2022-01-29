@@ -3,8 +3,9 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-import 'package:recover/src/model/recover_model_page.dart';
+import 'package:flutter/cupertino.dart';
 
+import 'model/recover_model_page.dart';
 import 'recover_service.dart';
 
 class RecoverController {
@@ -12,23 +13,13 @@ class RecoverController {
 
   RecoverController(this._service);
 
+  showPrevious() => _service.showPage(_service.state.previous!);
   showAccount() => _service.showPage(RecoverModelPage.account);
   showCreating() => _service.showPage(RecoverModelPage.creating);
   showBackup() => _service.showPage(RecoverModelPage.backup);
-  showBackupPin() => _service.showPage(RecoverModelPage.backupPin);
-  showBackupPassphrase() =>
-      _service.showPage(RecoverModelPage.backupPassphrase);
+  showQrCode() => _service.showPage(RecoverModelPage.qrCode);
   showSuccess() => _service.showPage(RecoverModelPage.success);
   showRecover() => _service.showPage(RecoverModelPage.recover);
-  showQrCode() => _service.showPage(RecoverModelPage.qrCode);
-  showRecoverPin() => _service.showPage(RecoverModelPage.recoverPin);
-  showRecoverPassphrase() =>
-      _service.showPage(RecoverModelPage.recoverPassphrase);
-  showLocked() => _service.showPage(RecoverModelPage.locked);
-  showError() => _service.showPage(RecoverModelPage.error);
-  showCycle() => _service.showPage(RecoverModelPage.cycle);
-  showCyclePin() => _service.showPage(RecoverModelPage.cyclePin);
-  showCyclePassphrase() => _service.showPage(RecoverModelPage.cyclePassphrase);
 
   scanQr() {}
 
@@ -36,5 +27,11 @@ class RecoverController {
 
   submitPassphrase(RecoverModelPage page, String passphrase) {}
 
-  close() {}
+  close(BuildContext context) => Navigator.of(context).pop();
+
+  complete(BuildContext context) {
+    if (_service.onComplete != null)
+      _service.onComplete!(_service.state.keys?.address);
+    Navigator.of(context).pop();
+  }
 }

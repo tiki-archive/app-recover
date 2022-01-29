@@ -20,7 +20,7 @@ class RecoverWidgetBtnElev extends StatelessWidget {
     RecoverStyle style =
         Provider.of<RecoverService>(context, listen: false).style;
     return ElevatedButton(
-      onPressed: () => _callback,
+      onPressed: _callback,
       child: Text(_text,
           style: TextStyle(
             fontFamily: style.fontFamily,
