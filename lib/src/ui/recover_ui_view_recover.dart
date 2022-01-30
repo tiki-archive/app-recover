@@ -38,9 +38,7 @@ class RecoverUiViewRecover extends RecoverUiView {
                   RecoverWidgetBtnElev(_opt1Txt, controller.showQrCode),
                   Padding(
                       padding: EdgeInsets.symmetric(vertical: style.size(10))),
-                  RecoverWidgetBtnText(_opt2Txt, () {
-                    /*=> _service.controller.goToBackupRecoverFlow()*/
-                  })
+                  RecoverWidgetBtnText(_opt2Txt, controller.showRecoverPin)
                 ])),
           ],
         ));

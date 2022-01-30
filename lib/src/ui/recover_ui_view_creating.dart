@@ -89,4 +89,9 @@ class _RecoverUiViewCreating extends State<RecoverUiViewCreating> {
           ],
         ));
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 }

@@ -18,8 +18,6 @@ class RecoverModelState {
 
   String? pin;
   String? passphrase;
-  String? newPin;
-  String? newPassphrase;
 
   Uint8List? ciphertext;
   TikiKeysModel? keys;

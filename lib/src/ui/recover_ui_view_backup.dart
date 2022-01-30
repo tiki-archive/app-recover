@@ -35,7 +35,7 @@ class RecoverUiViewBackup extends RecoverUiView {
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                  RecoverWidgetBtnElev(_opt1Txt, () {}),
+                  RecoverWidgetBtnElev(_opt1Txt, controller.showBackupPin),
                   Padding(
                       padding: EdgeInsets.symmetric(vertical: style.size(10))),
                   RecoverWidgetBtnText(_opt2Txt, controller.showSuccess)

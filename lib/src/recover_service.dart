@@ -44,6 +44,16 @@ class RecoverService extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setPin(String pin) {
+    state.pin = pin;
+    notifyListeners();
+  }
+
+  void setPassphrase(String passphrase) {
+    state.passphrase = passphrase;
+    notifyListeners();
+  }
+
   Future<bool> decode(String address, String data, String sign) async {
     if (address.length != 44 || data.length != 44 || sign.length != 1624)
       return false;
@@ -66,23 +76,28 @@ class RecoverService extends ChangeNotifier {
       // invalid passphrase
     }
     return _keysService.provide(state.keys!);
+  }*/
+
+  Future<bool> lookup(String pin) async {
+    bool success = false;
+    await _bkupService.recover(
+        email: state.email!,
+        accessToken: state.accessToken!,
+        pin: pin,
+        onError: (error) {
+          //misc error -> move to error page
+        },
+        onSuccess: (ciphertext) {
+          if (ciphertext != null) {
+            state.ciphertext = ciphertext;
+            success = true;
+            notifyListeners();
+          }
+        });
+    return success;
   }
 
-  Future<void> lookup(String pin) => _bkupService.recover(
-      email: state.email!,
-      accessToken: state.accessToken!,
-      pin: pin,
-      onError: (error) {
-        //misc error
-      },
-      onSuccess: (ciphertext) {
-        if (ciphertext == null) {
-          //pin failed
-        }
-        state.ciphertext = ciphertext;
-      });
-
-  Future<void> cycle(String passphrase) async {
+  /*Future<void> cycle(String passphrase) async {
     Uint8List ciphertext = await _keysService.encrypt(passphrase, state.keys!);
     return _bkupService.cycle(
         email: state.email!,
