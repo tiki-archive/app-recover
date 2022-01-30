@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:logging/logging.dart';
 import 'package:recover/recover.dart';
 
 void main() {
@@ -16,6 +17,9 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    Logger.root.level = Level.ALL;
+    Logger.root.onRecord.listen((record) => print(
+        '${record.time.toIso8601String()}: ${record.level.name} [${record.loggerName}] ${record.message}'));
   }
 
   @override

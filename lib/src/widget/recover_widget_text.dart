@@ -22,17 +22,14 @@ class RecoverWidgetText extends StatelessWidget {
   Widget build(BuildContext context) {
     RecoverStyle style =
         Provider.of<RecoverService>(context, listen: false).style;
-    return LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-      return Text(_text,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-              height: 1.2,
-              fontWeight: style.textWeight,
-              fontSize: style.fontSize,
-              fontFamily: style.fontFamily,
-              color: _color ?? style.textColor,
-              fontStyle: _fontStyle ?? FontStyle.normal));
-    });
+    return Text(_text,
+        textAlign: TextAlign.center,
+        style: TextStyle(
+            height: 1.2,
+            fontWeight: style.textWeight,
+            fontSize: style.fontSize,
+            fontFamily: style.fontFamily,
+            color: _color ?? style.textColor,
+            fontStyle: _fontStyle ?? FontStyle.normal));
   }
 }

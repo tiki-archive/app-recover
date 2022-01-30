@@ -20,7 +20,7 @@ class RecoverWidgetBtnText extends StatelessWidget {
     RecoverStyle style =
         Provider.of<RecoverService>(context, listen: false).style;
     return TextButton(
-        onPressed: () => _callback,
+        onPressed: _callback,
         style: TextButton.styleFrom(
             fixedSize: Size(style.buttonWidth, style.buttonHeight)),
         child: Text(_text,
