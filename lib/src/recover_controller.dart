@@ -23,6 +23,8 @@ class RecoverController {
   void showSuccess() => _service.showPage(RecoverModelPage.success);
   void showRecover() => _service.showPage(RecoverModelPage.recover);
   void showBackupPin() => _service.showPage(RecoverModelPage.backupPin);
+  void showBackupPassphrase() =>
+      _service.showPage(RecoverModelPage.backupPassphrase);
   void showRecoverPin() => _service.showPage(RecoverModelPage.recoverPin);
 
   Future<bool> scanQr() async {

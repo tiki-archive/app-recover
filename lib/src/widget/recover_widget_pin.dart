@@ -17,7 +17,7 @@ class RecoverWidgetPin extends StatefulWidget {
   const RecoverWidgetPin(this._submit, {int? min}) : _min = min ?? 6;
 
   @override
-  State<StatefulWidget> createState() => _RecoverWidgetPin(_submit, min: _min);
+  State<StatefulWidget> createState() => _RecoverWidgetPin(_submit, _min);
 }
 
 class _RecoverWidgetPin extends State<RecoverWidgetPin> {
@@ -26,9 +26,7 @@ class _RecoverWidgetPin extends State<RecoverWidgetPin> {
   final TextEditingController _textEditingController = TextEditingController();
   final void Function(String) _submit;
 
-  Color errorColor = Colors.transparent;
-
-  _RecoverWidgetPin(this._submit, {int? min}) : _min = min ?? 6;
+  _RecoverWidgetPin(this._submit, this._min);
 
   @override
   void initState() {
@@ -37,29 +35,26 @@ class _RecoverWidgetPin extends State<RecoverWidgetPin> {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedContainer(
-        duration: Duration(milliseconds: 250),
-        color: errorColor,
-        child: Stack(alignment: Alignment.center, children: [
-          EditableText(
-            obscureText: true,
-            autofocus: true,
-            focusNode: _focusNode,
-            cursorColor: Colors.transparent,
-            showCursor: false,
-            style: TextStyle(color: Colors.transparent),
-            backgroundCursorColor: Colors.transparent,
-            keyboardType: TextInputType.number,
-            keyboardAppearance: Brightness.light,
-            inputFormatters: [LengthLimitingTextInputFormatter(_min)],
-            controller: _textEditingController,
-            onChanged: (s) {
-              if (s.length == _min) _submit(s);
-              setState(() {});
-            },
-          ),
-          Wrap(alignment: WrapAlignment.center, children: _circles(context))
-        ]));
+    return Stack(alignment: Alignment.center, children: [
+      EditableText(
+        obscureText: true,
+        autofocus: true,
+        focusNode: _focusNode,
+        cursorColor: Colors.transparent,
+        showCursor: false,
+        style: TextStyle(color: Colors.transparent),
+        backgroundCursorColor: Colors.transparent,
+        keyboardType: TextInputType.number,
+        keyboardAppearance: Brightness.light,
+        inputFormatters: [LengthLimitingTextInputFormatter(_min)],
+        controller: _textEditingController,
+        onChanged: (s) {
+          if (s.length == _min) _submit(s);
+          setState(() {});
+        },
+      ),
+      Wrap(alignment: WrapAlignment.center, children: _circles(context))
+    ]);
   }
 
   @override

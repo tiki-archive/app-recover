@@ -25,7 +25,7 @@ class RecoverUiViewPinBackup extends RecoverUiViewPin {
     RecoverService service =
         Provider.of<RecoverService>(context, listen: false);
     service.setPin(pin);
-    //controller.showBackupPasshrase
+    controller.showBackupPassphrase();
   }
 
   @override

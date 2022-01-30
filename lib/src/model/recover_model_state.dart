@@ -10,7 +10,7 @@ import 'package:wallet/wallet.dart';
 import 'recover_model_page.dart';
 
 class RecoverModelState {
-  RecoverModelPage page = RecoverModelPage.account;
+  RecoverModelPage page = RecoverModelPage.backupPassphrase;
   RecoverModelPage? previous;
 
   String? email;

@@ -5,13 +5,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'recover_ui_view_pin_backup.dart';
+import 'package:recover/src/ui/recover_ui_view_pass_backup.dart';
 
 import '../model/recover_model_page.dart';
 import '../recover_service.dart';
 import 'recover_ui_view_account.dart';
 import 'recover_ui_view_backup.dart';
 import 'recover_ui_view_creating.dart';
+import 'recover_ui_view_pin_backup.dart';
 import 'recover_ui_view_pin_recover.dart';
 import 'recover_ui_view_qr_code.dart';
 import 'recover_ui_view_recover.dart';
@@ -31,8 +32,7 @@ class RecoverUiLayout extends StatelessWidget {
       case RecoverModelPage.backupPin:
         return RecoverUiViewPinBackup();
       case RecoverModelPage.backupPassphrase:
-        // TODO: Handle this case.
-        break;
+        return RecoverUiViewPassBackup();
       case RecoverModelPage.success:
         return RecoverUiViewSuccess();
       case RecoverModelPage.recover:
