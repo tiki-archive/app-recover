@@ -21,7 +21,7 @@ dependencies:
   wallet:
     git:
       url: https://github.com/tiki/wallet
-      ref: 0.0.4
+      ref: 0.0.5
   httpp:
     git:
       url: https://github.com/tiki/httpp

@@ -19,9 +19,11 @@ class RecoverUiViewQrCode extends RecoverUiView {
       'Hint: Your QR code is in your account menu. Click the avatar in the upper left.';
   static const String _opt1Txt = 'Scan';
 
+  late final RecoverService service;
+
   @override
   Widget page(BuildContext context) {
-    RecoverService service = Provider.of<RecoverService>(context);
+    service = Provider.of<RecoverService>(context);
     return Container(
         height: style.modalContainerHeight,
         padding: EdgeInsets.all(style.modalContentPadding),
@@ -47,8 +49,12 @@ class RecoverUiViewQrCode extends RecoverUiView {
                           right: style.size(20)),
                       child: RecoverWidgetText(_hint,
                           color: style.hintColor, fontStyle: FontStyle.italic)),
-                  RecoverWidgetBtnElev(_opt1Txt, () {
-                    /*_service.controller.goToUseExistingAccount()*/
+                  RecoverWidgetBtnElev(_opt1Txt, () async {
+                    if (await controller.scanQr()) {
+                      service.setError(false);
+                      controller.showSuccess();
+                    } else
+                      service.setError(true);
                   })
                 ]))
           ],
@@ -56,5 +62,8 @@ class RecoverUiViewQrCode extends RecoverUiView {
   }
 
   @override
-  void back(BuildContext context) => controller.showRecover();
+  void back(BuildContext context) {
+    service.setError(false);
+    controller.showRecover();
+  }
 }

@@ -3,7 +3,9 @@
  * MIT license. See LICENSE file in root directory.
  */
 
+import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import 'model/recover_model_page.dart';
 import 'recover_service.dart';
@@ -13,15 +15,24 @@ class RecoverController {
 
   RecoverController(this._service);
 
-  showPrevious() => _service.showPage(_service.state.previous!);
-  showAccount() => _service.showPage(RecoverModelPage.account);
-  showCreating() => _service.showPage(RecoverModelPage.creating);
-  showBackup() => _service.showPage(RecoverModelPage.backup);
-  showQrCode() => _service.showPage(RecoverModelPage.qrCode);
-  showSuccess() => _service.showPage(RecoverModelPage.success);
-  showRecover() => _service.showPage(RecoverModelPage.recover);
+  void showPrevious() => _service.showPage(_service.state.previous!);
+  void showAccount() => _service.showPage(RecoverModelPage.account);
+  void showCreating() => _service.showPage(RecoverModelPage.creating);
+  void showBackup() => _service.showPage(RecoverModelPage.backup);
+  void showQrCode() => _service.showPage(RecoverModelPage.qrCode);
+  void showSuccess() => _service.showPage(RecoverModelPage.success);
+  void showRecover() => _service.showPage(RecoverModelPage.recover);
 
-  scanQr() {}
+  Future<bool> scanQr() async {
+    if (await Permission.camera.request().isGranted) {
+      ScanResult result = await BarcodeScanner.scan();
+      if (result.type == ResultType.Barcode) {
+        List keys = result.rawContent.split(".");
+        return _service.decode(keys[0], keys[1], keys[2]);
+      }
+    }
+    return false;
+  }
 
   submitPin(RecoverModelPage page, String pin) {}
 
