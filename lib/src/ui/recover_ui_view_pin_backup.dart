@@ -18,9 +18,6 @@ class RecoverUiViewPinBackup extends RecoverUiViewPin {
   String get subtitle => 'Enter a pin';
 
   @override
-  String get error => 'Enter a pin';
-
-  @override
   void onSubmit(BuildContext context, String pin) {
     RecoverService service =
         Provider.of<RecoverService>(context, listen: false);

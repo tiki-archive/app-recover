@@ -27,17 +27,16 @@ abstract class RecoverUiViewPin extends RecoverUiView {
               RecoverWidgetText(title),
               Container(
                   padding: EdgeInsets.only(bottom: style.size(50)),
-                  child: service.state.isError
-                      ? RecoverWidgetText(error,
-                          color: service.style.errorColor)
-                      : RecoverWidgetText(subtitle)),
+                  child: service.state.error == null
+                      ? RecoverWidgetText(subtitle)
+                      : RecoverWidgetText(service.state.error!,
+                          color: style.errorColor)),
               RecoverWidgetPin((pin) => onSubmit(context, pin)),
             ]));
   }
 
   String get title;
   String get subtitle;
-  String get error;
 
   void onSubmit(BuildContext context, String pin);
 }

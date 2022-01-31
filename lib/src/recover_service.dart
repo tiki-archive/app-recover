@@ -3,6 +3,8 @@
  * MIT license. See LICENSE file in root directory.
  */
 
+import 'dart:io';
+
 import 'package:flutter/widgets.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:httpp/httpp.dart';
@@ -39,8 +41,13 @@ class RecoverService extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setError(bool isError) {
-    state.isError = isError;
+  void setError(String? error) {
+    state.error = error;
+    notifyListeners();
+  }
+
+  void clearError() {
+    state.error = null;
     notifyListeners();
   }
 
@@ -85,7 +92,12 @@ class RecoverService extends ChangeNotifier {
         accessToken: state.accessToken!,
         pin: pin,
         onError: (error) {
-          //misc error -> move to error page
+          if (error is TikiBkupErrorHttp && error.rsp.code == 401)
+            print('unauthorized, token!!');
+          else if (error is SocketException)
+            throw StateError('No internet. Try again');
+          else
+            throw StateError('Weird error. Try again');
         },
         onSuccess: (ciphertext) {
           if (ciphertext != null) {

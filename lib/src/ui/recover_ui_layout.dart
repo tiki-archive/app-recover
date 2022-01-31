@@ -12,6 +12,7 @@ import '../recover_service.dart';
 import 'recover_ui_view_account.dart';
 import 'recover_ui_view_backup.dart';
 import 'recover_ui_view_creating.dart';
+import 'recover_ui_view_error.dart';
 import 'recover_ui_view_pin_backup.dart';
 import 'recover_ui_view_pin_recover.dart';
 import 'recover_ui_view_qr_code.dart';
@@ -48,8 +49,7 @@ class RecoverUiLayout extends StatelessWidget {
         // TODO: Handle this case.
         break;
       case RecoverModelPage.error:
-        // TODO: Handle this case.
-        break;
+        return RecoverUiViewError();
       case RecoverModelPage.cycle:
         // TODO: Handle this case.
         break;

@@ -14,7 +14,7 @@ import 'recover_ui_view.dart';
 
 class RecoverUiViewQrCode extends RecoverUiView {
   static const String _title = 'Open your QR code on your other device.';
-  static const String _titleError = 'QR code invalid. Try again';
+  static const String _error = 'QR code invalid. Try again';
   static const String _hint =
       'Hint: Your QR code is in your account menu. Click the avatar in the upper left.';
   static const String _opt1Txt = 'Scan';
@@ -35,9 +35,10 @@ class RecoverUiViewQrCode extends RecoverUiView {
             Container(
                 padding: EdgeInsets.symmetric(
                     horizontal: style.textPaddingHorizontal),
-                child: !service.state.isError
+                child: service.state.error == null
                     ? RecoverWidgetText(_title)
-                    : RecoverWidgetText(_titleError, color: style.errorColor)),
+                    : RecoverWidgetText(service.state.error!,
+                        color: service.style.errorColor)),
             Expanded(
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -51,10 +52,10 @@ class RecoverUiViewQrCode extends RecoverUiView {
                           color: style.hintColor, fontStyle: FontStyle.italic)),
                   RecoverWidgetBtnElev(_opt1Txt, () async {
                     if (await controller.scanQr()) {
-                      service.setError(false);
+                      service.setError(_error);
                       controller.showSuccess();
                     } else
-                      service.setError(true);
+                      service.clearError();
                   })
                 ]))
           ],
@@ -63,7 +64,7 @@ class RecoverUiViewQrCode extends RecoverUiView {
 
   @override
   void back(BuildContext context) {
-    service.setError(false);
+    service.clearError();
     controller.showRecover();
   }
 }

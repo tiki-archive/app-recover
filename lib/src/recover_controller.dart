@@ -26,6 +26,7 @@ class RecoverController {
   void showBackupPassphrase() =>
       _service.showPage(RecoverModelPage.backupPassphrase);
   void showRecoverPin() => _service.showPage(RecoverModelPage.recoverPin);
+  void showError() => _service.showPage(RecoverModelPage.error);
 
   Future<bool> scanQr() async {
     if (await Permission.camera.request().isGranted) {

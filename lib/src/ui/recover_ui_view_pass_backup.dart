@@ -11,6 +11,8 @@ import '../recover_service.dart';
 import 'recover_ui_view_pass.dart';
 
 class RecoverUiViewPassBackup extends RecoverUiViewPass {
+  static const _error = 'Invalid. Must be 8+ characters';
+
   @override
   String get title => 'Backing up...';
 
@@ -18,23 +20,20 @@ class RecoverUiViewPassBackup extends RecoverUiViewPass {
   String get subtitle => 'Enter a passphrase';
 
   @override
-  String get error => 'Invalid. Must be 8+ characters';
-
-  @override
   void onSubmit(BuildContext context, String passphrase) {
     RecoverService service =
         Provider.of<RecoverService>(context, listen: false);
     if (passphrase.length < 8)
-      service.setError(true);
+      service.setError(_error);
     else {
-      service.setError(false);
+      service.clearError();
       //TODO state logic for backup submission.
     }
   }
 
   @override
   void back(BuildContext context) {
-    Provider.of<RecoverService>(context, listen: false).setError(false);
+    Provider.of<RecoverService>(context, listen: false).clearError();
     controller.showBackupPin();
   }
 }

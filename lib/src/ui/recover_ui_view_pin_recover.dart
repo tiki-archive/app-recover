@@ -11,6 +11,8 @@ import 'package:recover/src/ui/recover_ui_view_pin.dart';
 import '../recover_service.dart';
 
 class RecoverUiViewPinRecover extends RecoverUiViewPin {
+  static const _error = 'Incorrect pin. Try again';
+
   @override
   String get title => 'Restoring from backup...';
 
@@ -18,23 +20,25 @@ class RecoverUiViewPinRecover extends RecoverUiViewPin {
   String get subtitle => 'Enter your pin';
 
   @override
-  String get error => 'Incorrect pin. Try again';
-
-  @override
   Future<void> onSubmit(BuildContext context, String pin) async {
     RecoverService service =
         Provider.of<RecoverService>(context, listen: false);
     service.setPin(pin);
-    if (await service.lookup(pin)) {
-      //move to passphrase
-      service.setError(false);
-    } else
-      service.setError(true);
+    try {
+      if (await service.lookup(pin)) {
+        //move to passphrase
+        service.clearError();
+      } else
+        service.setError(_error);
+    } on StateError catch (error) {
+      service.setError(error.message);
+      controller.showError();
+    }
   }
 
   @override
   void back(BuildContext context) {
-    Provider.of<RecoverService>(context, listen: false).setError(false);
+    Provider.of<RecoverService>(context, listen: false).clearError();
     controller.showRecover();
   }
 }

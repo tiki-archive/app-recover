@@ -27,10 +27,10 @@ abstract class RecoverUiViewPass extends RecoverUiView {
               RecoverWidgetText(title),
               Container(
                   padding: EdgeInsets.only(bottom: style.size(30)),
-                  child: service.state.isError
-                      ? RecoverWidgetText(error,
-                          color: service.style.errorColor)
-                      : RecoverWidgetText(subtitle)),
+                  child: service.state.error == null
+                      ? RecoverWidgetText(subtitle)
+                      : RecoverWidgetText(service.state.error!,
+                          color: service.style.errorColor)),
               Container(
                   padding: EdgeInsets.symmetric(horizontal: style.size(40)),
                   child: RecoverWidgetPass(
@@ -40,7 +40,6 @@ abstract class RecoverUiViewPass extends RecoverUiView {
 
   String get title;
   String get subtitle;
-  String get error;
 
   void onSubmit(BuildContext context, String passphrase);
 }
