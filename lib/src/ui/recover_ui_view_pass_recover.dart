@@ -26,8 +26,10 @@ class RecoverUiViewPassRecover extends RecoverUiViewPass {
     if (await service.decrypt(passphrase)) {
       service.state.passphrase = passphrase;
       service.clearError();
+      controller.finishLoading();
       controller.showCycle();
     } else {
+      controller.finishLoading();
       service.setError(_error);
     }
   }

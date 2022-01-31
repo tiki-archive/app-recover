@@ -6,7 +6,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
-import 'package:recover/src/widget/recover_widget_pin.dart';
+import '../widget/recover_widget_pin.dart';
 
 import '../recover_service.dart';
 import '../widget/recover_widget_text.dart';

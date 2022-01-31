@@ -65,4 +65,12 @@ class RecoverController {
           query:
               'subject=${Uri.encodeComponent('Account Locked')}&body=${Uri.encodeComponent('My TIKI account is locked. Code: $code')}')
       .toString());
+
+  void setLoading() {
+    _service.setLoading();
+  }
+
+  void finishLoading() {
+    _service.finishLoading();
+  }
 }

@@ -25,13 +25,16 @@ class RecoverUiViewPassBackup extends RecoverUiViewPass {
   Future<void> onSubmit(BuildContext context, String passphrase) async {
     RecoverService service =
         Provider.of<RecoverService>(context, listen: false);
-    if (passphrase.length < 8)
+    if (passphrase.length < 8) {
+      controller.finishLoading();
       service.setError(_error);
-    else {
+    } else {
       await service.backup(passphrase, () {
         service.clearError();
+        controller.finishLoading();
         controller.showSuccess();
       }, (error) {
+        controller.finishLoading();
         if (error is StateError) {
           service.setError(error.message);
           controller.showError();
