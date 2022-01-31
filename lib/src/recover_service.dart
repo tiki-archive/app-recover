@@ -66,6 +66,11 @@ class RecoverService extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setNewPin(String newPin) {
+    state.newPin = newPin;
+    notifyListeners();
+  }
+
   void setPassphrase(String passphrase) {
     state.passphrase = passphrase;
     notifyListeners();
@@ -87,30 +92,34 @@ class RecoverService extends ChangeNotifier {
     }
   }
 
-  /*Future<void> decrypt(String passphrase) async {
+  Future<bool> decrypt(String passphrase) async {
     state.keys = await _keysService.decrypt(passphrase, state.ciphertext!);
-    if (state.keys == null) {
-      // invalid passphrase
+    if (state.keys == null)
+      return false;
+    else {
+      await _keysService.provide(state.keys!);
+      return true;
     }
-    return _keysService.provide(state.keys!);
-  }*/
+  }
 
-  Future<void> lookup(String pin, Function(bool) onComplete, Function(Error) onError) =>
+  Future<void> lookup(
+          String pin, Function(bool) onComplete, Function(Error) onError) =>
       _bkupService.recover(
-        email: state.email!,
-        accessToken: state.accessToken!,
-        pin: pin,
-        onError: (error) => onError(_mapError(error)),
-        onSuccess: (ciphertext) {
-          if (ciphertext != null) {
-            state.ciphertext = ciphertext;
-            notifyListeners();
-            onComplete(true);
-          }else
-            onComplete(false);
-        });
+          email: state.email!,
+          accessToken: state.accessToken!,
+          pin: pin,
+          onError: (error) => onError(_mapError(error)),
+          onSuccess: (ciphertext) {
+            if (ciphertext != null) {
+              state.ciphertext = ciphertext;
+              notifyListeners();
+              onComplete(true);
+            } else
+              onComplete(false);
+          });
 
-  /*Future<void> cycle(String passphrase) async {
+  Future<void> cycle(
+      String passphrase, Function() onSuccess, Function(Error) onError) async {
     Uint8List ciphertext = await _keysService.encrypt(passphrase, state.keys!);
     return _bkupService.cycle(
         email: state.email!,
@@ -118,16 +127,12 @@ class RecoverService extends ChangeNotifier {
         oldPin: state.pin!,
         newPin: state.newPin!,
         ciphertext: ciphertext,
-        onError: (error) {
-          //misc error
-        },
-        onSuccess: () {
-          //cycle worked
-        });
+        onError: (error) => onError(_mapError(error)),
+        onSuccess: onSuccess);
   }
-*/
 
-  Future<void> backup(String passphrase, Function() onSuccess, Function(Error) onError) async {
+  Future<void> backup(
+      String passphrase, Function() onSuccess, Function(Error) onError) async {
     Uint8List ciphertext = await _keysService.encrypt(passphrase, state.keys!);
     return _bkupService.backup(
         email: state.email!,

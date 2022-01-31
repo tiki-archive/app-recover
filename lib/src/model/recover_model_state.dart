@@ -17,6 +17,7 @@ class RecoverModelState {
   String? accessToken;
 
   String? pin;
+  String? newPin;
   String? passphrase;
 
   Uint8List? ciphertext;

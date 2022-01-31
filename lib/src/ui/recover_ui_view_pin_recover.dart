@@ -29,7 +29,7 @@ class RecoverUiViewPinRecover extends RecoverUiViewPin {
     service.setPin(pin);
     await service.lookup(pin, (success) {
       if (success) {
-        //move to passphrase
+        controller.showRecoverPassphrase();
         service.clearError();
       } else
         service.setError(_error);

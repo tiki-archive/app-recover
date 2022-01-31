@@ -5,15 +5,19 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:recover/src/ui/recover_ui_view_pass_backup.dart';
+import 'recover_ui_view_pass_backup.dart';
+import 'recover_ui_view_pin_cycle.dart';
 
 import '../model/recover_model_page.dart';
 import '../recover_service.dart';
 import 'recover_ui_view_account.dart';
 import 'recover_ui_view_backup.dart';
 import 'recover_ui_view_creating.dart';
+import 'recover_ui_view_cycle.dart';
 import 'recover_ui_view_error.dart';
 import 'recover_ui_view_lock.dart';
+import 'recover_ui_view_pass_cycle.dart';
+import 'recover_ui_view_pass_recover.dart';
 import 'recover_ui_view_pin_backup.dart';
 import 'recover_ui_view_pin_recover.dart';
 import 'recover_ui_view_qr_code.dart';
@@ -44,22 +48,17 @@ class RecoverUiLayout extends StatelessWidget {
       case RecoverModelPage.recoverPin:
         return RecoverUiViewPinRecover();
       case RecoverModelPage.recoverPassphrase:
-        // TODO: Handle this case.
-        break;
+        return RecoverUiViewPassRecover();
       case RecoverModelPage.locked:
         return RecoverUiViewLock();
       case RecoverModelPage.error:
         return RecoverUiViewError();
       case RecoverModelPage.cycle:
-        // TODO: Handle this case.
-        break;
+        return RecoverUiViewCycle();
       case RecoverModelPage.cyclePin:
-        // TODO: Handle this case.
-        break;
+        return RecoverUiViewPinCycle();
       case RecoverModelPage.cyclePassphrase:
-        // TODO: Handle this case.
-        break;
+        return RecoverUiViewPassCycle();
     }
-    throw UnimplementedError();
   }
 }
