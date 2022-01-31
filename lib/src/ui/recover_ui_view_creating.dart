@@ -4,10 +4,9 @@
  */
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
-import 'package:recover/src/widget/recover_widget_icons.dart';
+import '../widget/recover_widget_icons.dart';
 
 import '../recover_service.dart';
 import '../widget/recover_widget_text.dart';

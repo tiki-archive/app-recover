@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
-import 'package:recover/src/ui/recover_ui_view_pin.dart';
+import 'recover_ui_view_pin.dart';
 import 'package:wallet/wallet.dart';
 
 import '../recover_service.dart';

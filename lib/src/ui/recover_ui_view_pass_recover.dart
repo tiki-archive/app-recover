@@ -29,6 +29,7 @@ class RecoverUiViewPassRecover extends RecoverUiViewPass {
       controller.finishLoading();
       controller.showCycle();
     } else {
+      controller.finishLoading();
       service.setError(_error);
     }
   }

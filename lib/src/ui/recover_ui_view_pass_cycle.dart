@@ -37,6 +37,7 @@ class RecoverUiViewPassCycle extends RecoverUiViewPass {
         } else {
           _log.severe(error);
           service.setError('Weird error. Try again.');
+          controller.finishLoading();
           controller.showError();
         }
       });

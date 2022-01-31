@@ -40,17 +40,14 @@ class openModal extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
         onPressed: () => Recover(
-            email: 'tiki@mytiki.com',
-            accessToken:
-                'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJpc3MiOiJjb20ubXl0aWtpLmJvdW5jZXIiLCJleHAiOjE2NDM2MDE0NzIsImlhdCI6MTY0MzU5Nzg3Mn0.5vRJPyvcnwY4S-uRAJXVvfWTBevVHvnzS-k7p2GZ9oi_6kkCBJwY7h9cKfPgKyfZfsR9GhP-5yq7m-aM2CnPBA',
+            email: 'ricardolgrj@yahoo.com.br',
+            accessToken: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJpc3MiOiJjb20ubXl0aWtpLmJvdW5jZXIiLCJleHAiOjE2NDM2NjE2MDAsImlhdCI6MTY0MzY1ODAwMH0.W_lkkuW7PAkOyaGjzPYfISsmX5cJWDJ-1gFvwa8hXjfGn9lxahuyt1b_ueUUKVYtNR7pb2kG955r4njB_qkWSw',
             style: RecoverStyle(
                 mediaQueryData: MediaQuery.of(context),
                 fontFamily: 'NunitoSans',
                 textColor: Color(0xFF00133F),
                 buttonColor: Color(0xFFFF521C)),
-            onUnauthorized: () async {
-              return 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJpc3MiOiJjb20ubXl0aWtpLmJvdW5jZXIiLCJleHAiOjE2NDM2MTg5ODAsImlhdCI6MTY0MzYxNTM4MH0.8jwGDyHm1zhqvVnn3sG-dvf4izmD-7a8uuD0u8UYHnY8mfQlSH-FT_32O5Eo8kkgS629A3mutkTkb9AfTDFR0Q';
-            }).show(context),
+           ).show(context),
         child: Text('Open Modal'));
   }
 }
