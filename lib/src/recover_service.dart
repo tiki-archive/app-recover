@@ -25,11 +25,15 @@ class RecoverService extends ChangeNotifier {
   final TikiKeysService _keysService;
   final TikiBkupService _bkupService;
   final void Function(String?)? onComplete;
+  final Future<String> Function()? onUnauthorized;
   late final RecoverPresenter presenter;
   late final RecoverController controller;
 
   RecoverService(this.state, this.style,
-      {FlutterSecureStorage? secureStorage, Httpp? httpp, this.onComplete})
+      {FlutterSecureStorage? secureStorage,
+      Httpp? httpp,
+      this.onComplete,
+      this.onUnauthorized})
       : _keysService = TikiKeysService(secureStorage: secureStorage),
         _bkupService = TikiBkupService(httpp: httpp) {
     presenter = RecoverPresenter(this, style);
@@ -97,7 +101,9 @@ class RecoverService extends ChangeNotifier {
         email: state.email!,
         accessToken: state.accessToken!,
         pin: pin,
-        onError: _handleError,
+        onError: (error) => _handleError(error, () async {
+              success = await lookup(pin);
+            }),
         onSuccess: (ciphertext) {
           if (ciphertext != null) {
             state.ciphertext = ciphertext;
@@ -132,7 +138,9 @@ class RecoverService extends ChangeNotifier {
         accessToken: state.accessToken!,
         pin: state.pin!,
         ciphertext: ciphertext,
-        onError: _handleError,
+        onError: (error) => _handleError(error, () async {
+              await backup(passphrase);
+            }),
         onSuccess: () {});
   }
 
@@ -141,10 +149,14 @@ class RecoverService extends ChangeNotifier {
     notifyListeners();
   }
 
-  void _handleError(error) {
-    if (error is TikiBkupErrorHttp && error.rsp.code == 401)
-      print('unauthorized, token!!');
-    else if (error is TikiBkupErrorLock)
+  void _handleError(error, Function() authCallback) async {
+    if (error is TikiBkupErrorHttp &&
+        error.rsp.code == 401 &&
+        onUnauthorized != null) {
+      state.accessToken = await onUnauthorized!();
+      authCallback();
+      notifyListeners();
+    } else if (error is TikiBkupErrorLock)
       throw error;
     else if (error is SocketException)
       throw StateError('No internet. Try again');
