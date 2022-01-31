@@ -25,7 +25,6 @@ class RecoverService extends ChangeNotifier {
   final TikiKeysService _keysService;
   final TikiBkupService _bkupService;
   final void Function(String?)? onComplete;
-  final Future<String> Function()? onUnauthorized;
   late final RecoverPresenter presenter;
   late final RecoverController controller;
 
@@ -33,9 +32,10 @@ class RecoverService extends ChangeNotifier {
       {FlutterSecureStorage? secureStorage,
       Httpp? httpp,
       this.onComplete,
-      this.onUnauthorized})
+      Future<String> Function()? onUnauthorized})
       : _keysService = TikiKeysService(secureStorage: secureStorage),
-        _bkupService = TikiBkupService(httpp: httpp) {
+        _bkupService =
+            TikiBkupService(httpp: httpp, onUnauthorized: onUnauthorized) {
     presenter = RecoverPresenter(this, style);
     controller = RecoverController(this);
   }
@@ -95,24 +95,20 @@ class RecoverService extends ChangeNotifier {
     return _keysService.provide(state.keys!);
   }*/
 
-  Future<bool> lookup(String pin) async {
-    bool success = false;
-    await _bkupService.recover(
+  Future<void> lookup(String pin, Function(bool) onComplete, Function(Error) onError) =>
+      _bkupService.recover(
         email: state.email!,
         accessToken: state.accessToken!,
         pin: pin,
-        onError: (error) => _handleError(error, () async {
-              success = await lookup(pin);
-            }),
+        onError: (error) => onError(_mapError(error)),
         onSuccess: (ciphertext) {
           if (ciphertext != null) {
             state.ciphertext = ciphertext;
-            success = true;
             notifyListeners();
-          }
+            onComplete(true);
+          }else
+            onComplete(false);
         });
-    return success;
-  }
 
   /*Future<void> cycle(String passphrase) async {
     Uint8List ciphertext = await _keysService.encrypt(passphrase, state.keys!);
@@ -131,17 +127,15 @@ class RecoverService extends ChangeNotifier {
   }
 */
 
-  Future<void> backup(String passphrase) async {
+  Future<void> backup(String passphrase, Function() onSuccess, Function(Error) onError) async {
     Uint8List ciphertext = await _keysService.encrypt(passphrase, state.keys!);
     return _bkupService.backup(
         email: state.email!,
         accessToken: state.accessToken!,
         pin: state.pin!,
         ciphertext: ciphertext,
-        onError: (error) => _handleError(error, () async {
-              await backup(passphrase);
-            }),
-        onSuccess: () {});
+        onError: (error) => onError(_mapError(error)),
+        onSuccess: onSuccess);
   }
 
   Future<void> generate() async {
@@ -149,18 +143,12 @@ class RecoverService extends ChangeNotifier {
     notifyListeners();
   }
 
-  void _handleError(error, Function() authCallback) async {
-    if (error is TikiBkupErrorHttp &&
-        error.rsp.code == 401 &&
-        onUnauthorized != null) {
-      state.accessToken = await onUnauthorized!();
-      authCallback();
-      notifyListeners();
-    } else if (error is TikiBkupErrorLock)
-      throw error;
+  Error _mapError(error) {
+    if (error is TikiBkupErrorLock)
+      return error;
     else if (error is SocketException)
-      throw StateError('No internet. Try again');
+      return StateError('No internet. Try again');
     else
-      throw StateError('Weird error. Try again');
+      return StateError('Weird error. Try again');
   }
 }

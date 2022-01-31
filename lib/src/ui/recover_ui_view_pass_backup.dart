@@ -28,18 +28,19 @@ class RecoverUiViewPassBackup extends RecoverUiViewPass {
     if (passphrase.length < 8)
       service.setError(_error);
     else {
-      try {
-        await service.backup(passphrase);
+      await service.backup(passphrase, () {
         service.clearError();
         controller.showSuccess();
-      } on StateError catch (error) {
-        service.setError(error.message);
-        controller.showError();
-      } catch (error) {
-        _log.severe(error);
-        service.setError('Weird error. Try again.');
-        controller.showError();
-      }
+      }, (error) {
+        if (error is StateError) {
+          service.setError(error.message);
+          controller.showError();
+        } else {
+          _log.severe(error);
+          service.setError('Weird error. Try again.');
+          controller.showError();
+        }
+      });
     }
   }
 

@@ -16,17 +16,22 @@ export 'src/recover_style.dart';
 class Recover {
   final RecoverService _service;
 
-  Recover(
-      {required String email,
-      required String accessToken,
-      RecoverStyle? style,
-      FlutterSecureStorage? secureStorage,
-      Httpp? httpp})
-      : _service = RecoverService(
-            RecoverModelState(email: email, accessToken: accessToken),
-            style ?? RecoverStyle(),
-            secureStorage: secureStorage,
-            httpp: httpp);
+  Recover({
+    required String email,
+    required String accessToken,
+    RecoverStyle? style,
+    FlutterSecureStorage? secureStorage,
+    Httpp? httpp,
+    Function(String?)? onComplete,
+    Future<String> Function()? onUnauthorized,
+  }) : _service = RecoverService(
+          RecoverModelState(email: email, accessToken: accessToken),
+          style ?? RecoverStyle(),
+          secureStorage: secureStorage,
+          httpp: httpp,
+          onComplete: onComplete,
+          onUnauthorized: onUnauthorized,
+        );
 
   Future<void> show(BuildContext context) => _service.presenter.render(context);
 }

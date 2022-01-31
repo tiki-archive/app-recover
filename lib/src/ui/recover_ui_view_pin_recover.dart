@@ -27,23 +27,25 @@ class RecoverUiViewPinRecover extends RecoverUiViewPin {
     RecoverService service =
         Provider.of<RecoverService>(context, listen: false);
     service.setPin(pin);
-    try {
-      if (await service.lookup(pin)) {
+    await service.lookup(pin, (success) {
+      if (success) {
         //move to passphrase
         service.clearError();
       } else
         service.setError(_error);
-    } on StateError catch (error) {
-      service.setError(error.message);
-      controller.showError();
-    } on TikiBkupErrorLock catch (error) {
-      service.setLockCode(error.code);
-      controller.showLocked();
-    } catch (error) {
-      _log.severe(error);
-      service.setError('Weird error. Try again.');
-      controller.showError();
-    }
+    }, (error) {
+      if (error is StateError) {
+        service.setError(error.message);
+        controller.showError();
+      } else if (error is TikiBkupErrorLock) {
+        service.setLockCode(error.code);
+        controller.showLocked();
+      } else {
+        _log.severe(error);
+        service.setError('Weird error. Try again.');
+        controller.showError();
+      }
+    });
   }
 
   @override
