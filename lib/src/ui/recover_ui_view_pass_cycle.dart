@@ -32,6 +32,7 @@ class RecoverUiViewPassCycle extends RecoverUiViewPass {
       await service.cycle(passphrase, controller.showSuccess, (error) {
         if (error is StateError) {
           service.setError(error.message);
+          controller.finishLoading();
           controller.showError();
         } else {
           _log.severe(error);

@@ -26,5 +26,7 @@ class RecoverModelState {
   String? error;
   String? lockCode;
 
+  bool loading = false;
+
   RecoverModelState({this.email, this.accessToken});
 }

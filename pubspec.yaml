@@ -37,6 +37,7 @@ flutter:
     - packages/recover/res/images/pineapple-pizza.png
     - packages/recover/res/images/avocado.png
     - packages/recover/res/animation/creating.json
+    - packages/recover/res/animation/loading.json
   fonts:
     - family: RecoverIcons
       fonts:

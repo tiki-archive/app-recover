@@ -30,6 +30,7 @@ class RecoverUiViewPassBackup extends RecoverUiViewPass {
     else {
       await service.backup(passphrase, () {
         service.clearError();
+        controller.finishLoading();
         controller.showSuccess();
       }, (error) {
         if (error is StateError) {

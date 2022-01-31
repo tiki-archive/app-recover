@@ -156,4 +156,13 @@ class RecoverService extends ChangeNotifier {
     else
       return StateError('Weird error. Try again');
   }
+
+  void setLoading() {
+    state.loading = true;
+    notifyListeners();
+  }
+
+  void finishLoading() {
+    state.loading = false;
+  }
 }
