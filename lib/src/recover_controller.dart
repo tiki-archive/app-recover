@@ -6,6 +6,7 @@
 import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'model/recover_model_page.dart';
 import 'recover_service.dart';
@@ -27,6 +28,7 @@ class RecoverController {
       _service.showPage(RecoverModelPage.backupPassphrase);
   void showRecoverPin() => _service.showPage(RecoverModelPage.recoverPin);
   void showError() => _service.showPage(RecoverModelPage.error);
+  void showLocked() => _service.showPage(RecoverModelPage.locked);
 
   Future<bool> scanQr() async {
     if (await Permission.camera.request().isGranted) {
@@ -50,4 +52,11 @@ class RecoverController {
       _service.onComplete!(_service.state.keys?.address);
     Navigator.of(context).pop();
   }
+
+  contactSupport(String? code) => launch(Uri(
+          scheme: 'mailto',
+          path: 'support@mytiki.com',
+          query:
+              'subject=${Uri.encodeComponent('Account Locked')}&body=${Uri.encodeComponent('My TIKI account is locked. Code: $code')}')
+      .toString());
 }

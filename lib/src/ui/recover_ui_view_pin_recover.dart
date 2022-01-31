@@ -5,12 +5,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
 import 'package:recover/src/ui/recover_ui_view_pin.dart';
+import 'package:wallet/wallet.dart';
 
 import '../recover_service.dart';
 
 class RecoverUiViewPinRecover extends RecoverUiViewPin {
+  final Logger _log = Logger('RecoverUiViewPinRecover');
   static const _error = 'Incorrect pin. Try again';
 
   @override
@@ -32,6 +35,13 @@ class RecoverUiViewPinRecover extends RecoverUiViewPin {
         service.setError(_error);
     } on StateError catch (error) {
       service.setError(error.message);
+      controller.showError();
+    } on TikiBkupErrorLock catch (error) {
+      service.setLockCode(error.code);
+      controller.showLocked();
+    } catch (error) {
+      _log.severe(error);
+      service.setError('Weird error. Try again.');
       controller.showError();
     }
   }

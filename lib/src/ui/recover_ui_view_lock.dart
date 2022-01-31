@@ -12,9 +12,11 @@ import '../widget/recover_widget_btn_elev.dart';
 import '../widget/recover_widget_text.dart';
 import 'recover_ui_view.dart';
 
-class RecoverUiViewError extends RecoverUiView {
-  static const String _opt1Txt = 'Try again';
-  static const String _defaultMessage = 'Weird error. Try again';
+class RecoverUiViewLock extends RecoverUiView {
+  static const String _opt1Txt = 'Contact support';
+  static const String _title =
+      'Too many attempts. Your account has been locked.';
+  static const String _code = 'Give support this code:';
 
   late final RecoverService service;
 
@@ -30,22 +32,26 @@ class RecoverUiViewError extends RecoverUiView {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-                padding: EdgeInsets.only(bottom: style.size(10)),
-                child: RecoverWidgetText(service.state.error ?? _defaultMessage,
-                    color: style.errorColor)),
+                padding: EdgeInsets.symmetric(
+                    horizontal: style.textPaddingHorizontal),
+                child:
+                    RecoverWidgetText(_title, color: service.style.errorColor)),
             Expanded(
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                  RecoverWidgetText(_code,
+                      color: style.hintColor, fontStyle: FontStyle.italic),
                   Container(
-                      padding: EdgeInsets.only(bottom: style.size(30)),
-                      child: Image.asset("res/images/avocado.png",
-                          width: 75, package: 'recover')),
-                  RecoverWidgetBtnElev(_opt1Txt, () {
-                    service.clearError();
-                    controller.showPrevious();
-                  })
-                ])),
+                      padding: EdgeInsets.only(
+                          left: style.size(10),
+                          right: style.size(10),
+                          bottom: style.size(40)),
+                      child: RecoverWidgetText(service.state.lockCode ?? '',
+                          color: style.hintColor, fontStyle: FontStyle.italic)),
+                  RecoverWidgetBtnElev(_opt1Txt,
+                      () => controller.contactSupport(service.state.lockCode))
+                ]))
           ],
         ));
   }

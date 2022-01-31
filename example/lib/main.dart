@@ -41,7 +41,8 @@ class openModal extends StatelessWidget {
     return TextButton(
         onPressed: () => Recover(
                 email: 'tiki@mytiki.com',
-                accessToken: '',
+                accessToken:
+                    'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJpc3MiOiJjb20ubXl0aWtpLmJvdW5jZXIiLCJleHAiOjE2NDM2MDE0NzIsImlhdCI6MTY0MzU5Nzg3Mn0.5vRJPyvcnwY4S-uRAJXVvfWTBevVHvnzS-k7p2GZ9oi_6kkCBJwY7h9cKfPgKyfZfsR9GhP-5yq7m-aM2CnPBA',
                 style: RecoverStyle(
                     mediaQueryData: MediaQuery.of(context),
                     fontFamily: 'NunitoSans',

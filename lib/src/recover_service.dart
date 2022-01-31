@@ -4,6 +4,7 @@
  */
 
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -51,6 +52,11 @@ class RecoverService extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setLockCode(String? code) {
+    state.lockCode = code;
+    notifyListeners();
+  }
+
   void setPin(String pin) {
     state.pin = pin;
     notifyListeners();
@@ -91,14 +97,7 @@ class RecoverService extends ChangeNotifier {
         email: state.email!,
         accessToken: state.accessToken!,
         pin: pin,
-        onError: (error) {
-          if (error is TikiBkupErrorHttp && error.rsp.code == 401)
-            print('unauthorized, token!!');
-          else if (error is SocketException)
-            throw StateError('No internet. Try again');
-          else
-            throw StateError('Weird error. Try again');
-        },
+        onError: _handleError,
         onSuccess: (ciphertext) {
           if (ciphertext != null) {
             state.ciphertext = ciphertext;
@@ -124,6 +123,7 @@ class RecoverService extends ChangeNotifier {
           //cycle worked
         });
   }
+*/
 
   Future<void> backup(String passphrase) async {
     Uint8List ciphertext = await _keysService.encrypt(passphrase, state.keys!);
@@ -132,16 +132,23 @@ class RecoverService extends ChangeNotifier {
         accessToken: state.accessToken!,
         pin: state.pin!,
         ciphertext: ciphertext,
-        onError: (error) {
-          //misc error
-        },
-        onSuccess: () {
-          //backup worked
-        });
-  }*/
+        onError: _handleError,
+        onSuccess: () {});
+  }
 
   Future<void> generate() async {
     state.keys = await _keysService.generate();
     notifyListeners();
+  }
+
+  void _handleError(error) {
+    if (error is TikiBkupErrorHttp && error.rsp.code == 401)
+      print('unauthorized, token!!');
+    else if (error is TikiBkupErrorLock)
+      throw error;
+    else if (error is SocketException)
+      throw StateError('No internet. Try again');
+    else
+      throw StateError('Weird error. Try again');
   }
 }

@@ -23,6 +23,7 @@ class RecoverModelState {
   TikiKeysModel? keys;
 
   String? error;
+  String? lockCode;
 
   RecoverModelState({this.email, this.accessToken});
 }
